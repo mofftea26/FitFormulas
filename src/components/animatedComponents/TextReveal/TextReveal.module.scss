@@ -1,0 +1,55 @@
+.titleContainer {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.titleBox,
+[class*="box-"] {
+  position: absolute;
+  inset: 0;
+  background-color: var(--primary-500);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.titleText {
+  position: relative;
+  font-weight: 700;
+  color: var(--primary-700);
+
+  span {
+    font-size: 2rem;
+
+    display: inline-block;
+  }
+}
+
+.linesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lineGroup {
+  position: relative;
+  display: inline-block;
+}
+
+// 💡 Paragraph-specific styling
+.descriptionContainer {
+  margin-bottom: 2rem;
+  gap: 0rem;
+
+  .descriptionText {
+    font-size: 1rem;
+    max-width: 600px;
+    line-height: 1;
+    color: var(--primary-500);
+    margin: 0;
+  }
+}
