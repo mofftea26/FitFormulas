@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { useRef } from "react";
 import useCtaAnimation from "./hooks/useCtaAnimation";
 import styles from "./LandingPage.module.scss";
+import { ThemeToggle } from "@/components/providers/ThemeProvider/components/ThemeToggle";
 const LandingPage = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   useCtaAnimation(buttonRef);
@@ -35,6 +36,7 @@ const LandingPage = () => {
       >
         Get Started
       </Button>
+      <ThemeToggle />
     </div>
   );
 };

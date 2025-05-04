@@ -1,7 +1,8 @@
-import { useLayoutEffect, useRef, ElementType, createElement } from "react";
+import { useRef, ElementType, createElement } from "react";
 import gsap from "gsap";
+import SplitText from "gsap/SplitText";
+import { useGSAP } from "@gsap/react";
 import clsx from "clsx";
-import { useSplitText } from "@/hooks/useSplitText";
 import styles from "./TextReveal.module.scss";
 
 type TextRevealProps = {
@@ -11,7 +12,7 @@ type TextRevealProps = {
   containerClassName?: string;
   boxClassName?: string;
   textClassName?: string;
-  duration?: number; // total per block
+  duration?: number;
   delay?: number;
 };
 
@@ -26,84 +27,66 @@ const TextReveal = ({
   delay = 0,
 }: TextRevealProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { items } = useSplitText(text, splitBy);
+  const textRef = useRef<HTMLElement>(null);
 
   const isParagraph = as === "p";
   const noRotation = splitBy === "lines" || splitBy === "words";
   const noY = splitBy === "lines";
   const stagger = 0.1;
-  const boxDur =
-    splitBy === "lines"
-      ? duration * 0.6
-      : duration * 0.6 + (items.length - 1) * stagger;
-  const textDur = duration * 0.4;
 
-  useLayoutEffect(() => {
-    if (!containerRef.current || !items.every((item) => item.ref.current))
-      return;
+  useGSAP(() => {
+    if (!textRef.current || !containerRef.current) return;
+
+    const split = new SplitText(textRef.current, {
+      type: splitBy,
+    });
+
+    const targets =
+      splitBy === "lines"
+        ? split.lines
+        : splitBy === "words"
+        ? split.words
+        : split.chars;
+
+    const box = containerRef.current.querySelector(
+      splitBy === "lines" ? ".multi-box" : ".single-box"
+    );
 
     const tl = gsap.timeline({ delay });
 
-    if (splitBy === "lines") {
-      items.forEach((item, i) => {
-        const box = containerRef.current?.querySelector(`.box-${i}`);
-        if (!box || !item.ref.current) return;
-
-        tl.to(box, {
-          xPercent: 101,
-          transformOrigin: "left",
-          duration: boxDur,
-          ease: "power2.out",
-        });
-
-        tl.fromTo(
-          item.ref.current,
-          {
-            opacity: 0,
-            x: 100,
-            ...(noRotation ? {} : { rotation: 120 }),
-            ...(noY ? {} : { y: 10 }),
-          },
-          {
-            opacity: 1,
-            x: 0,
-            ...(noRotation ? {} : { rotation: 0 }),
-            ...(noY ? {} : { y: 0 }),
-            duration: textDur,
-            ease: "back.out(1.4)",
-          },
-          "<"
-        );
-      });
-    } else {
-      const all = items.map((item) => item.ref.current);
-      const box = containerRef.current?.querySelector(".single-box");
-      if (!box) return;
+    if (box) {
       tl.to(box, {
         xPercent: 101,
         transformOrigin: "left",
-        duration: boxDur,
-        ease: "power3.out",
-      }).fromTo(
-        all,
-        {
-          opacity: 0,
-          x: 100,
-          ...(noRotation ? {} : { rotation: 120 }),
-          ...(noY ? {} : { y: 10 }),
-        },
-        {
-          opacity: 1,
-          x: 0,
-          ...(noRotation ? {} : { rotation: 0 }),
-          ...(noY ? {} : { y: 0 }),
-          duration: textDur,
-          stagger,
-        },
-        "<"
-      );
+        duration: duration * 0.6,
+        ease: "power2.out",
+      });
     }
-  }, [items, splitBy, as, duration, delay]);
+
+    tl.fromTo(
+      targets,
+      {
+        opacity: 0,
+        x: 100,
+        ...(noRotation ? {} : { rotation: 120 }),
+        ...(noY ? {} : { y: 10 }),
+      },
+      {
+        opacity: 1,
+        x: 0,
+        ...(noRotation ? {} : { rotation: 0 }),
+        ...(noY ? {} : { y: 0 }),
+        duration: duration * 0.4,
+        ease: "back.out(1.4)",
+        stagger,
+      },
+      "<"
+    );
+
+    return () => {
+      split.revert(); // Clean up
+    };
+  }, [splitBy, duration, delay]);
 
   const Tag = as;
 
@@ -118,25 +101,19 @@ const TextReveal = ({
     >
       {splitBy === "lines" ? (
         <div className={styles.linesWrapper}>
-          {items.map((item, i) => (
-            <div className={styles.lineGroup} key={item.id}>
-              <div
-                className={clsx(styles.titleBox, `box-${i}`, boxClassName)}
-              />
-              {createElement(
-                Tag,
-                {
-                  className: clsx(
-                    styles.titleText,
-                    isParagraph && styles.descriptionText,
-                    textClassName
-                  ),
-                  ref: item.ref,
-                },
-                item.value
-              )}
-            </div>
-          ))}
+          <div className={clsx(styles.titleBox, "multi-box", boxClassName)} />
+          {createElement(
+            Tag,
+            {
+              className: clsx(
+                styles.titleText,
+                isParagraph && styles.descriptionText,
+                textClassName
+              ),
+              ref: textRef,
+            },
+            text
+          )}
         </div>
       ) : (
         <>
@@ -149,12 +126,9 @@ const TextReveal = ({
                 isParagraph && styles.descriptionText,
                 textClassName
               ),
+              ref: textRef,
             },
-            items.map((item) => (
-              <span key={item.id} ref={item.ref}>
-                {item.value}
-              </span>
-            ))
+            text
           )}
         </>
       )}

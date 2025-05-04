@@ -1,8 +1,9 @@
-import { RefObject, useLayoutEffect } from "react";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { RefObject } from "react";
 
 const useCtaAnimation = (buttonRef: RefObject<HTMLButtonElement | null>) => {
-  useLayoutEffect(() => {
+  useGSAP(() => {
     if (!buttonRef?.current) return;
     const tl = gsap.timeline();
     tl.fromTo(
@@ -28,7 +29,7 @@ const useCtaAnimation = (buttonRef: RefObject<HTMLButtonElement | null>) => {
       },
       "<"
     );
-  }, []);
+  });
 };
 
 export default useCtaAnimation;
