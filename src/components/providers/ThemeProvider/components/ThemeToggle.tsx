@@ -1,15 +1,15 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "../ThemeProvider";
-import Button from "../../../ui/Button/Button";
-import styles from "./ThemeToggle.module.scss";
+import { Button } from "@/components/ui/button";
+import clsx from "clsx";
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
     <Button
-      className={styles.themeToggle}
-      variant="default"
-      size="medium"
+      className={clsx("text-primary-800 hover:bg-primary-200")}
+      variant="outline"
+      size="lg"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? (

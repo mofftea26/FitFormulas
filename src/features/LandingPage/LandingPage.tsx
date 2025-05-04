@@ -1,15 +1,16 @@
 import TextReveal from "@/components/animatedComponents/TextReveal/TextReveal";
-import Button from "@/components/ui/Button/Button";
 import clsx from "clsx";
 import { useRef } from "react";
 import useCtaAnimation from "./hooks/useCtaAnimation";
 import styles from "./LandingPage.module.scss";
 import { ThemeToggle } from "@/components/providers/ThemeProvider/components/ThemeToggle";
+import { Button } from "@/components/ui/button";
 const LandingPage = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   useCtaAnimation(buttonRef);
   return (
     <div className={styles.container}>
+      <h1 className="text-primary-500">FitFormulas</h1>
       <TextReveal
         as="h1"
         text="FitFormulas"
@@ -29,9 +30,8 @@ const LandingPage = () => {
         delay={0.8}
       />
       <Button
-        className={clsx(styles.cta)}
+        className={clsx(styles.cta, "mb-2 text-primary-200")}
         variant="default"
-        size="large"
         ref={buttonRef}
       >
         Get Started
