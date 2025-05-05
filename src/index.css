@@ -1,63 +1,61 @@
-/* index.css */
 @import "./styles/tailwind.css";
-@import "./styles/variables.scss"; /* optional SCSS variables */
 
-/* Light (default) theme values */
-:root {
-  --theme-color-primary-50: rgb(245 246 250);
-  --theme-color-primary-100: rgb(225 226 236);
-  --theme-color-primary-200: rgb(195 198 217);
-  --theme-color-primary-300: rgb(165 169 198);
-  --theme-color-primary-400: rgb(135 140 178);
-  --theme-color-primary-500: rgb(105 112 159);
-  --theme-color-primary-600: rgb(84 90 131);
-  --theme-color-primary-700: rgb(65 69 101);
-  --theme-color-primary-800: rgb(45 48 71);
-  --theme-color-primary-900: rgb(29 30 45);
+/* Light Theme */
+[data-theme="light"] {
+  --color-primary-50: #f5f6fa;
+  --color-primary-100: #e1e2ec;
+  --color-primary-200: #c3c6d9;
+  --color-primary-300: #a5a9c6;
+  --color-primary-400: #878cb2;
+  --color-primary-500: #69709f;
+  --color-primary-600: #545a83;
+  --color-primary-700: #414565;
+  --color-primary-800: #2d3047;
+  --color-primary-900: #1d1e2d;
 
-  --theme-color-secondary-50: rgb(247 250 250);
-  --theme-color-secondary-100: rgb(241 246 247);
-  --theme-color-secondary-200: rgb(228 237 239);
-  --theme-color-secondary-300: rgb(214 228 231);
-  --theme-color-secondary-400: rgb(201 219 222);
-  --theme-color-secondary-500: rgb(187 210 214);
-  --theme-color-secondary-600: rgb(174 201 206);
-  --theme-color-secondary-700: rgb(147 183 190);
-  --theme-color-secondary-800: rgb(95 147 158);
-  --theme-color-secondary-900: rgb(32 49 53);
+  --color-secondary-50: #f7fafa;
+  --color-secondary-100: #f1f6f7;
+  --color-secondary-200: #e4edef;
+  --color-secondary-300: #d6e4e7;
+  --color-secondary-400: #c9dbde;
+  --color-secondary-500: #bbd2d6;
+  --color-secondary-600: #aec9ce;
+  --color-secondary-700: #93b7be;
+  --color-secondary-800: #5f939e;
+  --color-secondary-900: #203135;
 }
 
-/* Dark mode values */
+/* Dark Theme */
 [data-theme="dark"] {
-  --theme-color-primary-50: rgb(29 30 45);
-  --theme-color-primary-100: rgb(45 48 71);
-  --theme-color-primary-200: rgb(65 69 101);
-  --theme-color-primary-300: rgb(84 90 131);
-  --theme-color-primary-400: rgb(105 112 159);
-  --theme-color-primary-500: rgb(135 140 178);
-  --theme-color-primary-600: rgb(165 169 198);
-  --theme-color-primary-700: rgb(195 198 217);
-  --theme-color-primary-800: rgb(225 226 236);
-  --theme-color-primary-900: rgb(245 246 250);
+  --color-primary-50: #1d1e2d;
+  --color-primary-100: #2d3047;
+  --color-primary-200: #414565;
+  --color-primary-300: #545a83;
+  --color-primary-400: #69709f;
+  --color-primary-500: #878cb2;
+  --color-primary-600: #a5a9c6;
+  --color-primary-700: #c3c6d9;
+  --color-primary-800: #e1e2ec;
+  --color-primary-900: #f5f6fa;
 
-  --theme-color-secondary-50: rgb(32 49 53);
-  --theme-color-secondary-100: rgb(95 147 158);
-  --theme-color-secondary-200: rgb(147 183 190);
-  --theme-color-secondary-300: rgb(174 201 206);
-  --theme-color-secondary-400: rgb(187 210 214);
-  --theme-color-secondary-500: rgb(201 219 222);
-  --theme-color-secondary-600: rgb(214 228 231);
-  --theme-color-secondary-700: rgb(228 237 239);
-  --theme-color-secondary-800: rgb(241 246 247);
-  --theme-color-secondary-900: rgb(247 250 250);
+  --color-secondary-50: #203135;
+  --color-secondary-100: #5f939e;
+  --color-secondary-200: #93b7be;
+  --color-secondary-300: #aec9ce;
+  --color-secondary-400: #bbd2d6;
+  --color-secondary-500: #c9dbde;
+  --color-secondary-600: #d6e4e7;
+  --color-secondary-700: #e4edef;
+  --color-secondary-800: #f1f6f7;
+  --color-secondary-900: #f7fafa;
 }
 
-/* Global base styles */
+/* Global styles */
 body {
   font-family: system-ui, sans-serif;
   margin: 0;
   padding: 0;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 1s ease, color 0.3s ease;
 }
 
 * {

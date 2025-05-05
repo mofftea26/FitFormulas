@@ -30,17 +30,21 @@
   }
 }
 
-.cta {
-  padding: 1.5rem 2rem;
-  background-color: var(--secondary-700);
-  color: var(--primary-50);
-  border: none;
+.button {
   border-radius: 8px;
   font-weight: bold !important;
   font-size: 1rem !important;
   transition: background-color 0.3s ease;
+}
 
+.cta {
   &:hover {
     background-color: var(--secondary-700);
+  }
+}
+
+.darkCta {
+  &:hover {
+    background-color: var(--secondary-300);
   }
 }

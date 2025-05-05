@@ -1,13 +1,16 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { RefObject } from "react";
-
-const useCtaAnimation = (buttonRef: RefObject<HTMLButtonElement | null>) => {
+type UseCtaAnimationProps = {
+  ref: RefObject<HTMLButtonElement | null>;
+  delay?: number;
+};
+const useCtaAnimation = ({ ref, delay = 0 }: UseCtaAnimationProps) => {
   useGSAP(() => {
-    if (!buttonRef?.current) return;
+    if (!ref?.current) return;
     const tl = gsap.timeline();
     tl.fromTo(
-      buttonRef.current,
+      ref.current,
       { x: 100, opacity: 0 },
       {
         x: 0,
@@ -15,10 +18,10 @@ const useCtaAnimation = (buttonRef: RefObject<HTMLButtonElement | null>) => {
         duration: 1.5,
         ease: "elastic.out(0.8, 0.3)",
         stagger: 0.2,
-        delay: 1.5,
+        delay: 1.5 + delay,
       }
     ).fromTo(
-      buttonRef.current,
+      ref.current,
       { scaleX: 1.5, scaleY: 0.5 },
       {
         scaleX: 1,

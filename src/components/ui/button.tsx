@@ -9,11 +9,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary-500 text-white hover:bg-primary-600 ",
+        default:
+          "bg-primary-500 dark:bg-primary-900 text-primary-50  hover:bg-primary-600 ",
         destructive:
           "bg-red-500 text-white hover:bg-red-600 focus-visible:ring-red-500",
         outline:
-          "border border-primary-500 text-primary-500 bg-transparent hover:bg-primary-200",
+          "border border-primary-500 text-primary-500 bg-transparent hover:bg-primary-500",
         secondary: "bg-secondary-500 text-white hover:bg-secondary-600",
         ghost: "text-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900",
         link: "text-primary-500 underline-offset-4 hover:underline",
@@ -43,7 +44,7 @@ function Button({
     asChild?: boolean;
   }) {
   const Comp = asChild ? Slot : "button";
-
+  console.log(buttonVariants({ variant }));
   return (
     <Comp
       data-slot="button"
