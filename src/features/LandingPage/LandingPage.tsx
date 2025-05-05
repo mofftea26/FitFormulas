@@ -1,13 +1,19 @@
 import TextReveal from "@/components/animatedComponents/TextReveal/TextReveal";
-import Button from "@/components/ui/Button/Button";
 import clsx from "clsx";
 import { useRef } from "react";
 import useCtaAnimation from "./hooks/useCtaAnimation";
 import styles from "./LandingPage.module.scss";
 import { ThemeToggle } from "@/components/providers/ThemeProvider/components/ThemeToggle";
+import { Button } from "@/components/ui/button";
+import { useTheme } from "@/components/providers/ThemeProvider/ThemeProvider";
 const LandingPage = () => {
+  const { theme } = useTheme();
+
   const buttonRef = useRef<HTMLButtonElement>(null);
-  useCtaAnimation(buttonRef);
+  const themeToggleRef = useRef<HTMLButtonElement>(null);
+
+  useCtaAnimation({ ref: buttonRef });
+  useCtaAnimation({ ref: themeToggleRef, delay: 0.1 });
   return (
     <div className={styles.container}>
       <TextReveal
@@ -28,15 +34,22 @@ const LandingPage = () => {
         duration={1}
         delay={0.8}
       />
-      <Button
-        className={clsx(styles.cta)}
-        variant="default"
-        size="large"
-        ref={buttonRef}
-      >
-        Get Started
-      </Button>
-      <ThemeToggle />
+      <div className="flex items-center gap-2">
+        <Button
+          className={clsx(
+            styles.button,
+            styles.cta,
+            theme === "dark" && styles.darkCta,
+            "px-7 py-5"
+          )}
+          variant="default"
+          ref={buttonRef}
+          size="lg"
+        >
+          Get Started
+        </Button>
+        <ThemeToggle ref={themeToggleRef} className={clsx(styles.button)} />
+      </div>
     </div>
   );
 };

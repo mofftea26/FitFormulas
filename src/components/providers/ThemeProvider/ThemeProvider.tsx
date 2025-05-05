@@ -22,7 +22,7 @@ const ThemeContext = createContext<ThemeProviderState>({
 export function ThemeProvider({
   children,
   defaultTheme = "system",
-  storageKey = "fitformulas-theme",
+  storageKey = "theme",
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
     () => getItem(storageKey) ?? defaultTheme
