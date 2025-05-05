@@ -17,7 +17,7 @@ export const ThemeToggle = forwardRef<HTMLButtonElement, ThemeToggleProps>(
       <Button
         className={clsx(
           props.className,
-          "text-primary-800 text-primary-500 hover:bg-primary-500 hover:text-primary-50"
+          "text-primary-500 hover:bg-primary-500 hover:text-primary-50"
         )}
         variant="outline"
         size={props.type === "icon" ? "icon" : "lg"}
