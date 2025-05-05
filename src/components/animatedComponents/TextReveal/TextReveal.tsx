@@ -32,7 +32,7 @@ const TextReveal = ({
   const isParagraph = as === "p";
   const noRotation = splitBy === "lines" || splitBy === "words";
   const noY = splitBy === "lines";
-  const stagger = 0.1;
+  const stagger = 0.05;
 
   useGSAP(() => {
     if (!textRef.current || !containerRef.current) return;
@@ -58,7 +58,7 @@ const TextReveal = ({
       tl.to(box, {
         xPercent: 101,
         transformOrigin: "left",
-        duration: duration * 0.6,
+        duration: duration * 1.5,
         ease: "power2.out",
       });
     }
@@ -68,15 +68,15 @@ const TextReveal = ({
       {
         opacity: 0,
         x: 100,
-        ...(noRotation ? {} : { rotation: 120 }),
-        ...(noY ? {} : { y: 10 }),
+        ...(noRotation ? {} : { rotation: 60 }),
+        ...(noY ? {} : { y: 100 }),
       },
       {
         opacity: 1,
         x: 0,
         ...(noRotation ? {} : { rotation: 0 }),
         ...(noY ? {} : { y: 0 }),
-        duration: duration * 0.4,
+        duration: duration * 0.5,
         ease: "back.out(1.4)",
         stagger,
       },

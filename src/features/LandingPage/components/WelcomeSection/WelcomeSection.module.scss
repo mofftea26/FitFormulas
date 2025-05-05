@@ -1,0 +1,11 @@
+.titleContainer {
+  margin-bottom: 2rem;
+  margin-top: auto;
+  .titleText {
+    font-size: 5rem !important;
+    color: var(--primary-50);
+  }
+  .titleBox {
+    background-color: var(--secondary-500);
+  }
+}
