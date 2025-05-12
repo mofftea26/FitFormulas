@@ -1,41 +1,37 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "../ThemeProvider";
-import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { forwardRef } from "react";
+import styles from "./ThemeToggle.module.scss";
 
 type ThemeToggleProps = {
   className?: string;
-  type?: "icon" | "text";
-} & React.ComponentProps<typeof Button>;
+  buttonType?: "icon" | "text";
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const ThemeToggle = forwardRef<HTMLButtonElement, ThemeToggleProps>(
-  (props, ref) => {
+  ({ className, buttonType = "text", ...rest }, ref) => {
     const { theme, setTheme } = useTheme();
 
+    const isDark = theme === "dark";
+
     return (
-      <Button
-        className={clsx(
-          props.className,
-          "text-primary-500 hover:bg-primary-500 hover:text-primary-50"
-        )}
-        variant="outline"
-        size={props.type === "icon" ? "icon" : "lg"}
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      <button
+        type="button"
         ref={ref}
-      >
-        {theme === "dark" ? (
-          <>
-            <Sun size={16} />
-            {props.type === "text" && <span>Light Mode</span>}
-          </>
-        ) : (
-          <>
-            <Moon size={16} />
-            {props.type === "text" && <span>Dark Mode</span>}
-          </>
+        {...rest}
+        onClick={() => setTheme(isDark ? "light" : "dark")}
+        className={clsx(
+          className,
+          styles.toggle,
+          buttonType === "icon" && styles.iconSize
         )}
-      </Button>
+      >
+        {isDark ? <Sun size={16} /> : <Moon size={16} />}
+        {buttonType === "text" && (
+          <span>{isDark ? "Light Mode" : "Dark Mode"}</span>
+        )}
+      </button>
     );
   }
 );

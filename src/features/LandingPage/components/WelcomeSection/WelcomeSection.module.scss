@@ -1,3 +1,5 @@
+@use "../../../../styles/variables.scss";
+
 .titleContainer {
   margin-bottom: 2rem;
   margin-top: auto;
@@ -6,6 +8,6 @@
     color: var(--primary-50);
   }
   .titleBox {
-    background-color: var(--secondary-500);
+    background-color: var(--primary-50);
   }
 }

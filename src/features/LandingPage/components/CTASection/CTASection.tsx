@@ -1,19 +1,17 @@
 import TextReveal from "@/components/animatedComponents/TextReveal/TextReveal";
-import { Button } from "@/components/ui/button";
-import styles from "./CTASection.module.scss";
-import clsx from "clsx";
-import { useTheme } from "@/components/providers/ThemeProvider/ThemeProvider";
-import useCtaAnimation from "../../hooks/useCtaAnimation";
-import { useRef } from "react";
 import { ThemeToggle } from "@/components/providers/ThemeProvider/components/ThemeToggle";
+import { Link } from "@tanstack/react-router";
+import clsx from "clsx";
 import { motion, MotionValue, useTransform } from "framer-motion";
+import { useRef } from "react";
+import useCtaAnimation from "../../hooks/useCtaAnimation";
+import styles from "./CTASection.module.scss";
 
 const CTASection = ({
   scrollYProgress,
 }: {
   scrollYProgress: MotionValue<number>;
 }) => {
-  const { theme } = useTheme();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const themeToggleRef = useRef<HTMLButtonElement>(null);
 
@@ -46,20 +44,16 @@ const CTASection = ({
         delay={0.8}
       />
       <div className="flex items-center gap-2">
-        <Button
-          className={clsx(
-            styles.button,
-            styles.cta,
-            theme === "dark" && styles.darkCta,
-            "px-7 py-5"
-          )}
-          variant="default"
-          ref={buttonRef}
-          size="lg"
-        >
-          Get Started
-        </Button>
-        <ThemeToggle ref={themeToggleRef} className={clsx(styles.button)} />
+        <Link to="/dashboard">
+          <button className={clsx(styles.button, styles.cta)} ref={buttonRef}>
+            Get Started
+          </button>
+        </Link>
+        <ThemeToggle
+          ref={themeToggleRef}
+          className={clsx(styles.button)}
+          buttonType="icon"
+        />
       </div>
     </motion.div>
   );

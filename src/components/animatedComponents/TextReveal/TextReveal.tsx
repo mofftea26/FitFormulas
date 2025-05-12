@@ -1,9 +1,12 @@
 import { useRef, ElementType, createElement } from "react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import clsx from "clsx";
 import styles from "./TextReveal.module.scss";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type TextRevealProps = {
   text: string;
@@ -37,9 +40,7 @@ const TextReveal = ({
   useGSAP(() => {
     if (!textRef.current || !containerRef.current) return;
 
-    const split = new SplitText(textRef.current, {
-      type: splitBy,
-    });
+    const split = new SplitText(textRef.current, { type: splitBy });
 
     const targets =
       splitBy === "lines"
@@ -52,15 +53,27 @@ const TextReveal = ({
       splitBy === "lines" ? ".multi-box" : ".single-box"
     );
 
-    const tl = gsap.timeline({ delay });
+    const tl = gsap.timeline({
+      delay,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        toggleActions: "play reverse play reverse",
+      },
+    });
 
     if (box) {
-      tl.to(box, {
-        xPercent: 101,
-        transformOrigin: "left",
-        duration: duration * 1.5,
-        ease: "power2.out",
-      });
+      tl.fromTo(
+        box,
+        { xPercent: 0 },
+        {
+          xPercent: 101,
+          transformOrigin: "left",
+          duration: duration * 1.5,
+          ease: "power2.out",
+        }
+      );
     }
 
     tl.fromTo(
@@ -84,7 +97,7 @@ const TextReveal = ({
     );
 
     return () => {
-      split.revert(); // Clean up
+      split.revert();
     };
   }, [splitBy, duration, delay]);
 

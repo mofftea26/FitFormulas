@@ -1,3 +1,4 @@
+@use "@/styles/mixins" as *;
 .titleContainer {
   margin-bottom: 2rem;
   .titleText {
@@ -15,13 +16,8 @@
 }
 
 .cta {
+  @include btnPrimary;
   &:hover {
     background-color: var(--secondary-700);
-  }
-}
-
-.darkCta {
-  &:hover {
-    background-color: var(--secondary-300);
   }
 }

@@ -1,0 +1,12 @@
+@use "@/styles/mixins" as *;
+
+.toggle {
+  @include btnOutline;
+}
+
+.iconSize {
+  padding: 0.5rem;
+  width: 2.6rem;
+  height: 2.5rem;
+  justify-content: center;
+}

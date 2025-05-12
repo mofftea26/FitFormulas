@@ -11,13 +11,13 @@ const LandingPage = () => {
   const themeToggleRef = useRef<HTMLButtonElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  useCtaAnimation({ ref: buttonRef });
+  useCtaAnimation({ ref: themeToggleRef, delay: 0.1 });
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
-
-  useCtaAnimation({ ref: buttonRef });
-  useCtaAnimation({ ref: themeToggleRef, delay: 0.1 });
 
   useLenis();
   return (
