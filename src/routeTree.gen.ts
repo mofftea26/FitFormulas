@@ -8,115 +8,238 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as IndexImport } from "./routes/index";
-import { Route as DashboardIndexImport } from "./routes/dashboard/index";
+import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
+import { Route as DashboardIndexImport } from './routes/dashboard/index'
 
 // Create Virtual Routes
 
-const DashboardBmrMifflinLazyImport = createFileRoute(
-  "/dashboard/bmr-mifflin"
-)();
+const DashboardtdeeTdeeLazyImport = createFileRoute('/dashboard/(tdee)/tdee')()
+const DashboardmacrosMacrosLazyImport = createFileRoute(
+  '/dashboard/(macros)/macros',
+)()
+const DashboardbodyCompositionBodyCompositionLazyImport = createFileRoute(
+  '/dashboard/(body-composition)/body-composition',
+)()
+const DashboardbmrMifflinBmrMifflinLazyImport = createFileRoute(
+  '/dashboard/(bmr-mifflin)/bmr-mifflin',
+)()
+const DashboardbmrKatchBmrKatchLazyImport = createFileRoute(
+  '/dashboard/(bmr-katch)/bmr-katch',
+)()
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const DashboardIndexRoute = DashboardIndexImport.update({
-  id: "/dashboard/",
-  path: "/dashboard/",
+  id: '/dashboard/',
+  path: '/dashboard/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
-const DashboardBmrMifflinLazyRoute = DashboardBmrMifflinLazyImport.update({
-  id: "/dashboard/bmr-mifflin",
-  path: "/dashboard/bmr-mifflin",
+const DashboardtdeeTdeeLazyRoute = DashboardtdeeTdeeLazyImport.update({
+  id: '/dashboard/(tdee)/tdee',
+  path: '/dashboard/tdee',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
-  import("./routes/dashboard/bmr-mifflin.lazy").then((d) => d.Route)
-);
+  import('./routes/dashboard/(tdee)/tdee.lazy').then((d) => d.Route),
+)
+
+const DashboardmacrosMacrosLazyRoute = DashboardmacrosMacrosLazyImport.update({
+  id: '/dashboard/(macros)/macros',
+  path: '/dashboard/macros',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/dashboard/(macros)/macros.lazy').then((d) => d.Route),
+)
+
+const DashboardbodyCompositionBodyCompositionLazyRoute =
+  DashboardbodyCompositionBodyCompositionLazyImport.update({
+    id: '/dashboard/(body-composition)/body-composition',
+    path: '/dashboard/body-composition',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./routes/dashboard/(body-composition)/body-composition.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const DashboardbmrMifflinBmrMifflinLazyRoute =
+  DashboardbmrMifflinBmrMifflinLazyImport.update({
+    id: '/dashboard/(bmr-mifflin)/bmr-mifflin',
+    path: '/dashboard/bmr-mifflin',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./routes/dashboard/(bmr-mifflin)/bmr-mifflin.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const DashboardbmrKatchBmrKatchLazyRoute =
+  DashboardbmrKatchBmrKatchLazyImport.update({
+    id: '/dashboard/(bmr-katch)/bmr-katch',
+    path: '/dashboard/bmr-katch',
+    getParentRoute: () => rootRoute,
+  } as any).lazy(() =>
+    import('./routes/dashboard/(bmr-katch)/bmr-katch.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/dashboard/bmr-mifflin": {
-      id: "/dashboard/bmr-mifflin";
-      path: "/dashboard/bmr-mifflin";
-      fullPath: "/dashboard/bmr-mifflin";
-      preLoaderRoute: typeof DashboardBmrMifflinLazyImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/dashboard/": {
-      id: "/dashboard/";
-      path: "/dashboard";
-      fullPath: "/dashboard";
-      preLoaderRoute: typeof DashboardIndexImport;
-      parentRoute: typeof rootRoute;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/(bmr-katch)/bmr-katch': {
+      id: '/dashboard/(bmr-katch)/bmr-katch'
+      path: '/dashboard/bmr-katch'
+      fullPath: '/dashboard/bmr-katch'
+      preLoaderRoute: typeof DashboardbmrKatchBmrKatchLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/(bmr-mifflin)/bmr-mifflin': {
+      id: '/dashboard/(bmr-mifflin)/bmr-mifflin'
+      path: '/dashboard/bmr-mifflin'
+      fullPath: '/dashboard/bmr-mifflin'
+      preLoaderRoute: typeof DashboardbmrMifflinBmrMifflinLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/(body-composition)/body-composition': {
+      id: '/dashboard/(body-composition)/body-composition'
+      path: '/dashboard/body-composition'
+      fullPath: '/dashboard/body-composition'
+      preLoaderRoute: typeof DashboardbodyCompositionBodyCompositionLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/(macros)/macros': {
+      id: '/dashboard/(macros)/macros'
+      path: '/dashboard/macros'
+      fullPath: '/dashboard/macros'
+      preLoaderRoute: typeof DashboardmacrosMacrosLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/(tdee)/tdee': {
+      id: '/dashboard/(tdee)/tdee'
+      path: '/dashboard/tdee'
+      fullPath: '/dashboard/tdee'
+      preLoaderRoute: typeof DashboardtdeeTdeeLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/dashboard/bmr-mifflin": typeof DashboardBmrMifflinLazyRoute;
-  "/dashboard": typeof DashboardIndexRoute;
+  '/': typeof IndexRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/bmr-katch': typeof DashboardbmrKatchBmrKatchLazyRoute
+  '/dashboard/bmr-mifflin': typeof DashboardbmrMifflinBmrMifflinLazyRoute
+  '/dashboard/body-composition': typeof DashboardbodyCompositionBodyCompositionLazyRoute
+  '/dashboard/macros': typeof DashboardmacrosMacrosLazyRoute
+  '/dashboard/tdee': typeof DashboardtdeeTdeeLazyRoute
 }
 
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/dashboard/bmr-mifflin": typeof DashboardBmrMifflinLazyRoute;
-  "/dashboard": typeof DashboardIndexRoute;
+  '/': typeof IndexRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/bmr-katch': typeof DashboardbmrKatchBmrKatchLazyRoute
+  '/dashboard/bmr-mifflin': typeof DashboardbmrMifflinBmrMifflinLazyRoute
+  '/dashboard/body-composition': typeof DashboardbodyCompositionBodyCompositionLazyRoute
+  '/dashboard/macros': typeof DashboardmacrosMacrosLazyRoute
+  '/dashboard/tdee': typeof DashboardtdeeTdeeLazyRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/": typeof IndexRoute;
-  "/dashboard/bmr-mifflin": typeof DashboardBmrMifflinLazyRoute;
-  "/dashboard/": typeof DashboardIndexRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/(bmr-katch)/bmr-katch': typeof DashboardbmrKatchBmrKatchLazyRoute
+  '/dashboard/(bmr-mifflin)/bmr-mifflin': typeof DashboardbmrMifflinBmrMifflinLazyRoute
+  '/dashboard/(body-composition)/body-composition': typeof DashboardbodyCompositionBodyCompositionLazyRoute
+  '/dashboard/(macros)/macros': typeof DashboardmacrosMacrosLazyRoute
+  '/dashboard/(tdee)/tdee': typeof DashboardtdeeTdeeLazyRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/dashboard/bmr-mifflin" | "/dashboard";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/dashboard/bmr-mifflin" | "/dashboard";
-  id: "__root__" | "/" | "/dashboard/bmr-mifflin" | "/dashboard/";
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/dashboard/bmr-katch'
+    | '/dashboard/bmr-mifflin'
+    | '/dashboard/body-composition'
+    | '/dashboard/macros'
+    | '/dashboard/tdee'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/dashboard'
+    | '/dashboard/bmr-katch'
+    | '/dashboard/bmr-mifflin'
+    | '/dashboard/body-composition'
+    | '/dashboard/macros'
+    | '/dashboard/tdee'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard/'
+    | '/dashboard/(bmr-katch)/bmr-katch'
+    | '/dashboard/(bmr-mifflin)/bmr-mifflin'
+    | '/dashboard/(body-composition)/body-composition'
+    | '/dashboard/(macros)/macros'
+    | '/dashboard/(tdee)/tdee'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  DashboardBmrMifflinLazyRoute: typeof DashboardBmrMifflinLazyRoute;
-  DashboardIndexRoute: typeof DashboardIndexRoute;
+  IndexRoute: typeof IndexRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardbmrKatchBmrKatchLazyRoute: typeof DashboardbmrKatchBmrKatchLazyRoute
+  DashboardbmrMifflinBmrMifflinLazyRoute: typeof DashboardbmrMifflinBmrMifflinLazyRoute
+  DashboardbodyCompositionBodyCompositionLazyRoute: typeof DashboardbodyCompositionBodyCompositionLazyRoute
+  DashboardmacrosMacrosLazyRoute: typeof DashboardmacrosMacrosLazyRoute
+  DashboardtdeeTdeeLazyRoute: typeof DashboardtdeeTdeeLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DashboardBmrMifflinLazyRoute: DashboardBmrMifflinLazyRoute,
   DashboardIndexRoute: DashboardIndexRoute,
-};
+  DashboardbmrKatchBmrKatchLazyRoute: DashboardbmrKatchBmrKatchLazyRoute,
+  DashboardbmrMifflinBmrMifflinLazyRoute:
+    DashboardbmrMifflinBmrMifflinLazyRoute,
+  DashboardbodyCompositionBodyCompositionLazyRoute:
+    DashboardbodyCompositionBodyCompositionLazyRoute,
+  DashboardmacrosMacrosLazyRoute: DashboardmacrosMacrosLazyRoute,
+  DashboardtdeeTdeeLazyRoute: DashboardtdeeTdeeLazyRoute,
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -125,18 +248,34 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/dashboard/bmr-mifflin",
-        "/dashboard/"
+        "/dashboard/",
+        "/dashboard/(bmr-katch)/bmr-katch",
+        "/dashboard/(bmr-mifflin)/bmr-mifflin",
+        "/dashboard/(body-composition)/body-composition",
+        "/dashboard/(macros)/macros",
+        "/dashboard/(tdee)/tdee"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/dashboard/bmr-mifflin": {
-      "filePath": "dashboard/bmr-mifflin.lazy.tsx"
-    },
     "/dashboard/": {
       "filePath": "dashboard/index.tsx"
+    },
+    "/dashboard/(bmr-katch)/bmr-katch": {
+      "filePath": "dashboard/(bmr-katch)/bmr-katch.lazy.tsx"
+    },
+    "/dashboard/(bmr-mifflin)/bmr-mifflin": {
+      "filePath": "dashboard/(bmr-mifflin)/bmr-mifflin.lazy.tsx"
+    },
+    "/dashboard/(body-composition)/body-composition": {
+      "filePath": "dashboard/(body-composition)/body-composition.lazy.tsx"
+    },
+    "/dashboard/(macros)/macros": {
+      "filePath": "dashboard/(macros)/macros.lazy.tsx"
+    },
+    "/dashboard/(tdee)/tdee": {
+      "filePath": "dashboard/(tdee)/tdee.lazy.tsx"
     }
   }
 }

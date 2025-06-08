@@ -4,7 +4,11 @@ import { useForm } from "@tanstack/react-form";
 import clsx from "clsx";
 import styles from "./MifflinStJeorForm.module.scss";
 
-const MifflinStJeorForm = () => {
+type MifflinStJeorFormProps = {
+  setBmr: (bmr: number) => void;
+};
+
+const MifflinStJeorForm = ({ setBmr }: MifflinStJeorFormProps) => {
   const form = useForm({
     defaultValues: {
       weight: 80,
@@ -15,7 +19,7 @@ const MifflinStJeorForm = () => {
     } satisfies MifflinStJeorInput,
     onSubmit: async ({ value }) => {
       const bmr = calculateMifflinStJeor(value);
-      alert(`Your BMR is: ${bmr.toFixed(2)} kcal/day`);
+      setBmr(bmr);
     },
   });
 

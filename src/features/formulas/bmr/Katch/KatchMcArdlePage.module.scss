@@ -15,3 +15,11 @@
 .heading {
   @include heading;
 }
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  gap: 4rem;
+}

@@ -1,4 +1,7 @@
 @use "@/styles/mixins" as *;
-.btn {
+.link {
   @include btnPrimary;
+  .btn {
+    cursor: pointer;
+  }
 }

@@ -11,21 +11,23 @@ function Dashboard() {
       <Navbar />
       <main className="flex-1 p-4 bg-primary-100">
         <div className="flex flex-col gap-4 max-w-md mx-auto items-center">
-          <Link to="/dashboard/bmr-mifflin">
+          <Link to="/dashboard/bmr-mifflin" className={styles.link}>
             <button className={styles.btn}>Mifflin-St Jeor (BMR)</button>
           </Link>
-          {/* <Link to="/dashboard/bmr-katch">
-            <Button variant="default">Katch-McArdle (BMR)</Button>
+          <Link to="/dashboard/bmr-katch" className={styles.link}>
+            <button className={styles.btn}>Katch-McArdle (BMR)</button>
           </Link>
-          <Link to="/dashboard/tdee">
-            <Button variant="default">TDEE</Button>
+          <Link to="/dashboard/tdee" className={styles.link}>
+            <button className={styles.btn}>
+              Total daily energy expenditure
+            </button>
           </Link>
-          <Link to="/dashboard/macros">
-            <Button variant="default">Macros</Button>
+          <Link to="/dashboard/macros" className={styles.link}>
+            <button className={styles.btn}>Macronutrients</button>
           </Link>
-          <Link to="/dashboard/body-composition">
-            <Button variant="default">Body Composition</Button>
-          </Link> */}
+          <Link to="/dashboard/body-composition" className={styles.link}>
+            <button className={styles.btn}>Body Composition</button>
+          </Link>
         </div>
       </main>
     </div>
