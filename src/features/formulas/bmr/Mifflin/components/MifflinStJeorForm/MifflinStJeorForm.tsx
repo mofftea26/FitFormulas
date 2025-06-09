@@ -3,6 +3,9 @@ import { MifflinStJeorInput } from "@/utils/coreFunctions/bmr/types";
 import { useForm } from "@tanstack/react-form";
 import clsx from "clsx";
 import styles from "./MifflinStJeorForm.module.scss";
+import InputField from "@/components/ui/Input/InputField";
+import SelectField from "@/components/ui/Select/SelectField";
+import { useStore } from "@tanstack/react-form";
 
 type MifflinStJeorFormProps = {
   setBmr: (bmr: number) => void;
@@ -23,6 +26,10 @@ const MifflinStJeorForm = ({ setBmr }: MifflinStJeorFormProps) => {
     },
   });
 
+  const unit = useStore(form.store, (state) => state.values.unit);
+  const weightUnit = unit === "metric" ? "kg" : "lbs";
+  const heightUnit = unit === "metric" ? "cm" : "in";
+
   return (
     <form
       onSubmit={(e) => {
@@ -33,72 +40,71 @@ const MifflinStJeorForm = ({ setBmr }: MifflinStJeorFormProps) => {
     >
       <form.Field name="weight">
         {(field) => (
-          <input
+          <InputField
             type="number"
-            placeholder="Weight"
-            required
+            label="Weight"
+            placeholder="Enter weight"
             value={field.state.value}
-            onChange={(e) => field.handleChange(Number(e.target.value))}
-            className={clsx(styles.input)}
+            unit={weightUnit}
+            onChange={(val) => field.handleChange(Number(val))}
           />
         )}
       </form.Field>
 
       <form.Field name="height">
         {(field) => (
-          <input
+          <InputField
             type="number"
-            placeholder="Height"
-            required
+            label="Height"
+            placeholder="Enter height"
             value={field.state.value}
-            onChange={(e) => field.handleChange(Number(e.target.value))}
-            className={clsx(styles.input)}
+            unit={heightUnit}
+            onChange={(val) => field.handleChange(Number(val))}
           />
         )}
       </form.Field>
 
       <form.Field name="age">
         {(field) => (
-          <input
+          <InputField
             type="number"
-            placeholder="Age"
-            required
+            label="Age"
+            placeholder="Enter age"
             value={field.state.value}
-            onChange={(e) => field.handleChange(Number(e.target.value))}
-            className={clsx(styles.input)}
+            onChange={(val) => field.handleChange(Number(val))}
           />
         )}
       </form.Field>
 
       <form.Field name="sex">
         {(field) => (
-          <select
-            required
+          <SelectField
+            label="Sex"
             value={field.state.value}
-            onChange={(e) =>
-              field.handleChange(e.target.value as MifflinStJeorInput["sex"])
+            onChange={(val) =>
+              field.handleChange(val as MifflinStJeorInput["sex"])
             }
-            className={clsx(styles.select)}
-          >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
+            options={[
+              { value: "male", label: "Male" },
+              { value: "female", label: "Female" },
+            ]}
+          />
         )}
       </form.Field>
 
       <form.Field name="unit">
         {(field) => (
-          <select
-            required
-            value={field.state.value}
-            onChange={(e) =>
-              field.handleChange(e.target.value as "metric" | "imperial")
+          <SelectField
+            label="Unit"
+            value={field.state.value || "metric"}
+            onChange={(val) =>
+              field.handleChange(val as MifflinStJeorInput["unit"])
             }
-            className={clsx(styles.select)}
-          >
-            <option value="metric">Metric (kg, cm)</option>
-            <option value="imperial">Imperial (lbs, inches)</option>
-          </select>
+            options={[
+              { value: "metric", label: "Metric (kg, cm)" },
+              { value: "imperial", label: "Imperial (lbs, inches)" },
+            ]}
+          />
         )}
       </form.Field>
 

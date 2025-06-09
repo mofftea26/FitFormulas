@@ -5,6 +5,7 @@ import styles from "./MifflinStJeorPage.module.scss";
 import { useTheme } from "@/components/providers/ThemeProvider/ThemeProvider";
 import CalculatorResults from "../../components/CalculatorResults/CalculatorResults";
 import { useState } from "react";
+import Card from "@/components/ui/Card/Card";
 
 const MifflinStJeorPage = () => {
   const { theme } = useTheme();
@@ -18,7 +19,9 @@ const MifflinStJeorPage = () => {
           Mifflin-St Jeor BMR Calculator
         </h1>
         <div className={styles.form}>
-          <MifflinStJeorForm setBmr={setBmr} />
+          <Card>
+            <MifflinStJeorForm setBmr={setBmr} />
+          </Card>
           <CalculatorResults result={bmr.toString()} label="BMR" unit="kcal" />
         </div>
       </main>

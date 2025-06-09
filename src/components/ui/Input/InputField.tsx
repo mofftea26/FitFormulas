@@ -8,6 +8,7 @@ interface InputFieldProps {
   placeholder?: string;
   value: number | string;
   onChange: (val: number | string) => void;
+  unit?: string;
   className?: string;
   disabled?: boolean;
 }
@@ -18,6 +19,7 @@ const InputField: React.FC<InputFieldProps> = ({
   placeholder,
   value,
   onChange,
+  unit,
   className,
   disabled,
 }) => {
@@ -29,14 +31,17 @@ const InputField: React.FC<InputFieldProps> = ({
   return (
     <div className={clsx(styles.container, className)}>
       <label className={styles.label}>{label}</label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={handleChange}
-        className={styles.input}
-        disabled={disabled}
-      />
+      <div className={styles.inputWrapper}>
+        <input
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={handleChange}
+          disabled={disabled}
+          className={clsx(styles.input, unit && styles.hasUnit)}
+        />
+        {unit && <span className={styles.unit}>{unit}</span>}
+      </div>
     </div>
   );
 };

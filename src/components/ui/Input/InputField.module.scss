@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
   gap: 4px;
 }
 
@@ -14,6 +15,22 @@
   color: var(--color-secondary-800);
 }
 
-.input {
-  @include input;
+.inputWrapper {
+  width: 100%;
+  .input {
+    @include input;
+    padding-right: 40px;
+  }
+  .hasUnit {
+    padding-right: 60px;
+  }
+
+  .unit {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    font-size: 14px;
+    color: var(--color-secondary-800);
+    pointer-events: none;
+  }
 }

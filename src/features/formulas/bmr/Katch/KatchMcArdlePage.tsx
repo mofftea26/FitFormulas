@@ -5,6 +5,7 @@ import styles from "./KatchMcArdlePage.module.scss";
 import { useTheme } from "@/components/providers/ThemeProvider/ThemeProvider";
 import CalculatorResults from "../../components/CalculatorResults/CalculatorResults";
 import { useState } from "react";
+import Card from "@/components/ui/Card/Card";
 
 const KatchMcArdlePage = () => {
   const { theme } = useTheme();
@@ -17,7 +18,9 @@ const KatchMcArdlePage = () => {
           Katch-McArdle BMR Calculator
         </h1>
         <div className={styles.form}>
-          <KatchMcArdleForm setBmr={setBmr} />
+          <Card>
+            <KatchMcArdleForm setBmr={setBmr} />
+          </Card>
           <CalculatorResults result={bmr.toString()} label="BMR" unit="kcal" />
         </div>
       </main>

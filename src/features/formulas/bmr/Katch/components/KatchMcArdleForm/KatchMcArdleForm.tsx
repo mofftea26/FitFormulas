@@ -3,6 +3,8 @@ import { KatchMcArdleInput } from "@/utils/coreFunctions/bmr/types";
 import { useForm } from "@tanstack/react-form";
 import clsx from "clsx";
 import styles from "./KatchMcArdleForm.module.scss";
+import InputField from "@/components/ui/Input/InputField";
+import SelectField from "@/components/ui/Select/SelectField";
 
 type KatchMcArdleFormProps = {
   setBmr: (bmr: number) => void;
@@ -30,30 +32,29 @@ const KatchMcArdleForm = ({ setBmr }: KatchMcArdleFormProps) => {
     >
       <form.Field name="leanBodyMass">
         {(field) => (
-          <input
+          <InputField
             type="number"
-            placeholder="Lean Body Mass"
-            required
+            label="Lean Body Mass"
+            placeholder="Enter lean body mass"
             value={field.state.value}
-            onChange={(e) => field.handleChange(Number(e.target.value))}
-            className={clsx(styles.input)}
+            onChange={(val) => field.handleChange(Number(val))}
           />
         )}
       </form.Field>
 
       <form.Field name="unit">
         {(field) => (
-          <select
-            required
-            value={field.state.value}
-            onChange={(e) =>
-              field.handleChange(e.target.value as "metric" | "imperial")
+          <SelectField
+            label="Unit"
+            value={field.state.value || "metric"}
+            onChange={(val) =>
+              field.handleChange(val as KatchMcArdleInput["unit"])
             }
-            className={clsx(styles.select)}
-          >
-            <option value="metric">Metric (kg)</option>
-            <option value="imperial">Imperial (lbs)</option>
-          </select>
+            options={[
+              { value: "metric", label: "Metric (kg)" },
+              { value: "imperial", label: "Imperial (lbs)" },
+            ]}
+          />
         )}
       </form.Field>
 

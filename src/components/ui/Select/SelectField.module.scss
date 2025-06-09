@@ -1,11 +1,13 @@
 @use "@/styles/mixins" as *;
 
-.container {
+.wrapper {
   display: flex;
   flex-direction: column;
   gap: 4px;
   justify-content: center;
   align-items: center;
+  position: relative;
+  width: 100%;
 }
 
 .label {
@@ -14,7 +16,56 @@
   color: var(--color-secondary-800);
 }
 
-.select {
-  @include input;
-  appearance: none;
+.selectWrapper {
+  width: 100%;
+  position: relative;
+
+  .trigger {
+    @include input;
+    width: 100%;
+    appearance: none;
+    background-color: transparent;
+    padding-right: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-secondary-800);
+    pointer-events: none;
+  }
+
+  .dropdown {
+    margin-top: 4px;
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: var(--color-primary-50);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+
+    .option {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-size: 14px;
+
+      &:hover {
+        background-color: var(--color-primary-100);
+      }
+
+      &.selected {
+        background-color: var(--color-secondary-200);
+        font-weight: 600;
+      }
+    }
+  }
 }
