@@ -1,8 +1,8 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import MifflinStJeorPage from "../../../features/formulas/bmr/Mifflin/MifflinStJeorPage";
+import BodyCompositionPage from "@/features/formulas/bodyComposition/BodyCompositionPage";
 
 export const Route = createLazyFileRoute(
-  "/dashboard/(bmr-mifflin) copy 4/bmr-mifflin"
+  "/dashboard/(body-composition)/body-composition"
 )({
-  component: MifflinStJeorPage,
+  component: BodyCompositionPage,
 });

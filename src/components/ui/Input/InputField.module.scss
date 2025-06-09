@@ -1,0 +1,19 @@
+@use "@/styles/mixins" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-secondary-800);
+}
+
+.input {
+  @include input;
+}

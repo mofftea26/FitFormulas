@@ -1,0 +1,21 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  min-width: 300px;
+  max-width: 500px;
+  gap: 1rem;
+}
+
+.input,
+.select {
+  @include input;
+  min-width: 200px;
+}
+
+.btnPrimary {
+  @include btnPrimary;
+}
