@@ -1,23 +1,40 @@
 :root[data-theme="dark"] {
-  --primary-50: #1d1e2d;
-  --primary-100: #2d3047;
-  --primary-200: #414565;
-  --primary-300: #545a83;
-  --primary-400: #69709f;
-  --primary-500: #878cb2;
-  --primary-600: #a5a9c6;
-  --primary-700: #c3c6d9;
-  --primary-800: #e1e2ec;
-  --primary-900: #f5f6fa;
+  // Base
+  --color-background: #12141b; // true dark
+  --color-surface: #1e202a; // elevated surface (cards, modals, inputs)
+  --color-text: #e3e6ed; // soft off-white for text
+  --color-text-muted: #a5a9c6; // secondary text
+  --color-border: #2d2f3a; // border for inputs, cards
+  --color-accent: #8185ac; // default accent (primary-500)
 
-  --secondary-50: #203135;
-  --secondary-100: #5f939e;
-  --secondary-200: #93b7be;
-  --secondary-300: #aec9ce;
-  --secondary-400: #bbd2d6;
-  --secondary-500: #c9dbde;
-  --secondary-600: #d6e4e7;
-  --secondary-700: #e4edef;
-  --secondary-800: #f1f6f7;
-  --secondary-900: #f7fafa;
+  // PRIMARY – desaturated purples/blues
+  --primary-50: #1e2130;
+  --primary-100: #2b2f45;
+  --primary-200: #3a3f5d;
+  --primary-300: #4b5075;
+  --primary-400: #646891;
+  --primary-500: #8185ac;
+  --primary-600: #9fa2c5;
+  --primary-700: #c2c5dc;
+  --primary-800: #e0e2ef;
+  --primary-900: #f4f6fb;
+
+  // SECONDARY – teal-gray for contrast
+  --secondary-50: #1b2c30;
+  --secondary-100: #2c4d56;
+  --secondary-200: #3d6d7c;
+  --secondary-300: #4f8ea3;
+  --secondary-400: #6eabb9;
+  --secondary-500: #8fc8d1;
+  --secondary-600: #b2dee2;
+  --secondary-700: #d1edf0;
+  --secondary-800: #eaf8f9;
+  --secondary-900: #f7fcfc;
+
+  // STATES & UTILITY
+  --color-success: #43d675;
+  --color-warning: #ffc857;
+  --color-error: #ff6b6b;
+  --color-info: #56c0e0;
+  --color-overlay: rgba(18, 20, 27, 0.7);
 }
