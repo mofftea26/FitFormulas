@@ -12,10 +12,7 @@ const WelcomeSection = ({ scrollYProgress }: WelcomeSectionProps) => {
   const rotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
 
   return (
-    <motion.div
-      className="h-1/2 bg-primary-500 sticky top-0 z-0 flex items-center justify-center flex-col gap-4"
-      style={{ scale, rotate }}
-    >
+    <motion.div className={styles.container} style={{ scale, rotate }}>
       <TextReveal
         as="h1"
         text="Welcome to FitFormulas"
@@ -24,7 +21,7 @@ const WelcomeSection = ({ scrollYProgress }: WelcomeSectionProps) => {
         boxClassName={styles.titleBox}
         duration={1}
       />
-      <ChevronsDown className="w-20 h-20 text-primary-50 mt-auto animate-bounce" />
+      <ChevronsDown className={styles.chevron} />
     </motion.div>
   );
 };

@@ -7,10 +7,10 @@ export const Route = createFileRoute("/dashboard/")({
 
 function Dashboard() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className={styles.page}>
       <Navbar />
-      <main className="flex-1 p-4 bg-primary-100">
-        <div className="flex flex-col gap-4 max-w-md mx-auto items-center">
+      <main className={styles.main}>
+        <div className={styles.links}>
           <Link to="/dashboard/bmr-mifflin" className={styles.link}>
             <button className={styles.btn}>Mifflin-St Jeor (BMR)</button>
           </Link>
