@@ -11,10 +11,16 @@ import InputField from "@/components/ui/Input/InputField";
 import SelectField from "@/components/ui/Select/SelectField";
 
 type BodyCompositionFormProps = {
-  onEstimate: (bodyFat: number, leanMass: number, fatMass: number) => void;
+  onCalculate: (
+    bodyFat: number,
+    leanMass: number,
+    fatMass: number,
+    values: BodyFatInput & { weight: number }
+  ) => void;
+  onClear: () => void;
 };
 
-const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
+const BodyCompositionForm = ({ onCalculate, onClear }: BodyCompositionFormProps) => {
   const form = useForm({
     defaultValues: {
       sex: "male" as BodyFatInput["sex"],
@@ -37,7 +43,7 @@ const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
         bodyFatPercent: bodyFat,
         unit: value.unit,
       });
-      onEstimate(bodyFat, leanMass, fatMass);
+      onCalculate(bodyFat, leanMass, fatMass, value);
     },
   });
   const unit = useStore(form.store, (state) => state.values.unit);
@@ -162,7 +168,7 @@ const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
         onClick={(e) => {
           e.preventDefault();
           form.reset();
-          onEstimate(0, 0, 0);
+          onClear();
         }}
         className={clsx(styles.btnOutline)}
       >
