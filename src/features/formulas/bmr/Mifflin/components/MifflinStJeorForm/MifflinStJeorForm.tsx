@@ -9,27 +9,37 @@ import { useStore } from "@tanstack/react-form";
 import Card from "@/components/ui/Card/Card";
 
 type MifflinStJeorFormProps = {
-  setBmr: (bmr: number) => void;
+  onCalculate: (bmr: number, values: MifflinStJeorInput) => void;
+  onClear: () => void;
 };
 
-const MifflinStJeorForm = ({ setBmr }: MifflinStJeorFormProps) => {
+const MifflinStJeorForm = ({
+  onCalculate,
+  onClear,
+}: MifflinStJeorFormProps) => {
   const form = useForm({
     defaultValues: {
-      weight: 80,
-      height: 180,
-      age: 30,
-      sex: "male" as MifflinStJeorInput["sex"],
-      unit: "metric" as MifflinStJeorInput["unit"],
+      weight: 0,
+      height: 0,
+      age: 0,
+      sex: "" as MifflinStJeorInput["sex"],
+      unit: "" as MifflinStJeorInput["unit"],
     } satisfies MifflinStJeorInput,
     onSubmit: async ({ value }) => {
       const bmr = calculateMifflinStJeor(value);
-      setBmr(bmr);
+      onCalculate(bmr, value);
     },
   });
 
   const unit = useStore(form.store, (state) => state.values.unit);
   const weightUnit = unit === "metric" ? "kg" : "lbs";
   const heightUnit = unit === "metric" ? "cm" : "in";
+
+  const onClearForm = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    form.reset();
+    onClear();
+  };
 
   return (
     <Card className={styles.container}>
@@ -113,14 +123,7 @@ const MifflinStJeorForm = ({ setBmr }: MifflinStJeorFormProps) => {
         <button type="submit" className={clsx(styles.btnPrimary)}>
           Calculate BMR
         </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            form.reset();
-            setBmr(0);
-          }}
-          className={clsx(styles.btnOutline)}
-        >
+        <button onClick={onClearForm} className={clsx(styles.btnOutline)}>
           Clear
         </button>
       </form>
