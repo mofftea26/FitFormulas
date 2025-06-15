@@ -1,0 +1,22 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 300px;
+  max-width: 500px;
+  gap: 1rem;
+}
+
+.input,
+.select {
+  @include input;
+}
+
+.btnPrimary {
+  @include btnPrimary;
+}
+.btnOutline {
+  @include btnOutline;
+}
