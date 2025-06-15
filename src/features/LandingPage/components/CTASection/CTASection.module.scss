@@ -1,4 +1,23 @@
 @use "@/styles/mixins" as *;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  background-color: var(--primary-50);
+  z-index: 10;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.smallText {
+  font-size: 0.875rem !important;
+}
 .titleContainer {
   margin-bottom: 2rem;
   .titleText {

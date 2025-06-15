@@ -22,10 +22,7 @@ const CTASection = ({
   const rotate = useTransform(scrollYProgress, [0, 1], [-5, 0]);
 
   return (
-    <motion.div
-      className="flex flex-col items-center justify-center h-1/2 bg-primary-50 z-10"
-      style={{ scale, rotate }}
-    >
+    <motion.div className={styles.container} style={{ scale, rotate }}>
       <TextReveal
         as="h1"
         text="FitFormulas"
@@ -37,13 +34,12 @@ const CTASection = ({
       <TextReveal
         as="p"
         splitBy="lines"
-        textClassName={"text-sm"}
-        text="Your personalized fitness & nutrition SaaS — calculate BMR, macros,
-  micros, body composition, and more."
+        textClassName={styles.smallText}
+        text="Your personalized fitness & nutrition SaaS — calculate BMR, macros, micros, body composition, and more."
         duration={1}
         delay={0.8}
       />
-      <div className="flex items-center gap-2">
+      <div className={styles.actions}>
         <Link to="/dashboard">
           <button className={clsx(styles.button, styles.cta)} ref={buttonRef}>
             Get Started
