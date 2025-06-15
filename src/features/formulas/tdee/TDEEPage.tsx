@@ -1,15 +1,19 @@
 import Navbar from "@/components/layout/Navbar/Navbar";
 import TDEEForm from "./components/TDEEForm/TDEEForm";
+import UserValues from "./components/UserValues/UserValues";
 import clsx from "clsx";
 import styles from "./TDEEPage.module.scss";
 import { useTheme } from "@/components/providers/ThemeProvider/ThemeProvider";
 import CalculatorResults from "../components/CalculatorResults/CalculatorResults";
 import { useState } from "react";
-import Card from "@/components/ui/Card/Card";
+import { motion } from "framer-motion";
+import type { TDEEInput } from "@/utils/coreFunctions/tdee/types";
 
 const TDEEPage = () => {
   const { theme } = useTheme();
   const [tdee, setTdee] = useState<number>(0);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [formValues, setFormValues] = useState<TDEEInput | null>(null);
 
   return (
     <div className={clsx(styles.page)}>
@@ -18,18 +22,40 @@ const TDEEPage = () => {
         <h1 className={clsx(styles.heading, theme === "dark" && styles.dark)}>
           Total Daily Energy Expenditure
         </h1>
-        <div className={styles.form}>
-          <Card>
-            <TDEEForm setTdee={setTdee} />
-          </Card>
-          {tdee !== 0 && (
-            <CalculatorResults
-              result={tdee.toString()}
-              label="TDEE"
-              unit="kcal"
+
+        <motion.div
+          className={clsx(styles.card)}
+          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className={clsx(styles.face, styles.front)}>
+            <TDEEForm
+              onCalculate={(val, values) => {
+                setFormValues(values);
+                setTdee(val);
+                setIsFlipped(true);
+              }}
+              onClear={() => {
+                setTdee(0);
+                setFormValues(null);
+                setIsFlipped(false);
+              }}
             />
+          </div>
+
+          {formValues && (
+            <div className={clsx(styles.face, styles.back)}>
+              <UserValues values={formValues} />
+              <CalculatorResults result={tdee.toString()} label="TDEE" unit="kcal" />
+              <button
+                onClick={() => setIsFlipped(false)}
+                className={clsx(styles.btnOutline)}
+              >
+                Go Back
+              </button>
+            </div>
           )}
-        </div>
+        </motion.div>
       </main>
     </div>
   );

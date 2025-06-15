@@ -7,10 +7,11 @@ import InputField from "@/components/ui/Input/InputField";
 import SelectField from "@/components/ui/Select/SelectField";
 
 type TDEEFormProps = {
-  setTdee: (tdee: number) => void;
+  onCalculate: (tdee: number, values: TDEEInput) => void;
+  onClear: () => void;
 };
 
-const TDEEForm = ({ setTdee }: TDEEFormProps) => {
+const TDEEForm = ({ onCalculate, onClear }: TDEEFormProps) => {
   const form = useForm({
     defaultValues: {
       bmr: 1800,
@@ -18,7 +19,7 @@ const TDEEForm = ({ setTdee }: TDEEFormProps) => {
     } satisfies TDEEInput,
     onSubmit: async ({ value }) => {
       const tdee = calculateTDEE(value);
-      setTdee(tdee);
+      onCalculate(tdee, value);
     },
   });
 
@@ -69,7 +70,7 @@ const TDEEForm = ({ setTdee }: TDEEFormProps) => {
         onClick={(e) => {
           e.preventDefault();
           form.reset();
-          setTdee(0);
+          onClear();
         }}
         className={clsx(styles.btnOutline)}
       >

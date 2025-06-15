@@ -7,10 +7,11 @@ import InputField from "@/components/ui/Input/InputField";
 import SelectField from "@/components/ui/Select/SelectField";
 
 type KatchMcArdleFormProps = {
-  setBmr: (bmr: number) => void;
+  onCalculate: (bmr: number, values: KatchMcArdleInput) => void;
+  onClear: () => void;
 };
 
-const KatchMcArdleForm = ({ setBmr }: KatchMcArdleFormProps) => {
+const KatchMcArdleForm = ({ onCalculate, onClear }: KatchMcArdleFormProps) => {
   const form = useForm({
     defaultValues: {
       leanBodyMass: 65,
@@ -18,7 +19,7 @@ const KatchMcArdleForm = ({ setBmr }: KatchMcArdleFormProps) => {
     } satisfies KatchMcArdleInput,
     onSubmit: async ({ value }) => {
       const bmr = calculateKatchMcArdle(value);
-      setBmr(bmr);
+      onCalculate(bmr, value);
     },
   });
   const unit = useStore(form.store, (state) => state.values.unit);
@@ -67,7 +68,7 @@ const KatchMcArdleForm = ({ setBmr }: KatchMcArdleFormProps) => {
         onClick={(e) => {
           e.preventDefault();
           form.reset();
-          setBmr(0);
+          onClear();
         }}
         className={clsx(styles.btnOutline)}
       >

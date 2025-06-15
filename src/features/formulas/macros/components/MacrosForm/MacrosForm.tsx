@@ -8,10 +8,11 @@ import SelectField from "@/components/ui/Select/SelectField";
 import type { MacroResults } from "../../MacrosPage";
 
 type MacrosFormProps = {
-  setMacros: (macros: MacroResults) => void;
+  onCalculate: (macros: MacroResults, values: MacroInput) => void;
+  onClear: () => void;
 };
 
-const MacrosForm = ({ setMacros }: MacrosFormProps) => {
+const MacrosForm = ({ onCalculate, onClear }: MacrosFormProps) => {
   const form = useForm({
     defaultValues: {
       weight: 80,
@@ -22,7 +23,7 @@ const MacrosForm = ({ setMacros }: MacrosFormProps) => {
     } satisfies MacroInput,
     onSubmit: async ({ value }) => {
       const macros = calculateMacros(value);
-      setMacros(macros);
+      onCalculate(macros, value);
     },
   });
 
@@ -107,11 +108,7 @@ const MacrosForm = ({ setMacros }: MacrosFormProps) => {
         onClick={(e) => {
           e.preventDefault();
           form.reset();
-          setMacros({
-            protein: 0,
-            carbs: 0,
-            fats: 0,
-          });
+          onClear();
         }}
         className={clsx(styles.btnOutline)}
       >
