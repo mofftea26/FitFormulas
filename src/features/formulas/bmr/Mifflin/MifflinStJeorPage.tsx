@@ -19,12 +19,14 @@ const MifflinStJeorPage = () => {
         </h1>
         <div className={styles.content}>
           <MifflinStJeorForm setBmr={setBmr} />
-          <CalculatorResults
-            result={bmr.toString()}
-            label="BMR"
-            unit="kcal"
-            className={styles.result}
-          />
+          {bmr !== 0 && (
+            <CalculatorResults
+              result={bmr.toString()}
+              label="BMR"
+              unit="kcal"
+              className={styles.result}
+            />
+          )}
         </div>
       </main>
     </div>

@@ -21,7 +21,13 @@ const KatchMcArdlePage = () => {
           <Card>
             <KatchMcArdleForm setBmr={setBmr} />
           </Card>
-          <CalculatorResults result={bmr.toString()} label="BMR" unit="kcal" />
+          {bmr !== 0 && (
+            <CalculatorResults
+              result={bmr.toString()}
+              label="BMR"
+              unit="kcal"
+            />
+          )}
         </div>
       </main>
     </div>

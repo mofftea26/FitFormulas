@@ -6,6 +6,7 @@ import { useTheme } from "@/components/providers/ThemeProvider/ThemeProvider";
 import CalculatorResults from "../components/CalculatorResults/CalculatorResults";
 import { useState } from "react";
 import Card from "@/components/ui/Card/Card";
+import { truncateTo2Digits } from "@/utils/helpers/helperFunctions";
 
 const BodyCompositionPage = () => {
   const { theme } = useTheme();
@@ -38,21 +39,21 @@ const BodyCompositionPage = () => {
           <div className={styles.results}>
             {bodyFat !== null && (
               <CalculatorResults
-                result={bodyFat.toString()}
+                result={truncateTo2Digits(bodyFat).toString()}
                 label="Body Fat %"
                 unit="%"
               />
             )}
             {leanMass !== null && (
               <CalculatorResults
-                result={leanMass.toString()}
+                result={truncateTo2Digits(leanMass).toString()}
                 label="Lean Body Mass"
                 unit="kg"
               />
             )}
             {fatMass !== null && (
               <CalculatorResults
-                result={fatMass.toString()}
+                result={truncateTo2Digits(fatMass).toString()}
                 label="Fat Mass"
                 unit="kg"
               />
