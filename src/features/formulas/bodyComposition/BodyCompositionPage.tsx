@@ -37,21 +37,21 @@ const BodyCompositionPage = () => {
             <BodyCompositionForm onEstimate={handleEstimate} />
           </Card>
           <div className={styles.results}>
-            {bodyFat !== null && (
+            {bodyFat !== null && bodyFat !== 0 && (
               <CalculatorResults
                 result={truncateTo2Digits(bodyFat).toString()}
                 label="Body Fat %"
                 unit="%"
               />
             )}
-            {leanMass !== null && (
+            {leanMass !== null && leanMass !== 0 && (
               <CalculatorResults
                 result={truncateTo2Digits(leanMass).toString()}
                 label="Lean Body Mass"
                 unit="kg"
               />
             )}
-            {fatMass !== null && (
+            {fatMass !== null && fatMass !== 0 && (
               <CalculatorResults
                 result={truncateTo2Digits(fatMass).toString()}
                 label="Fat Mass"

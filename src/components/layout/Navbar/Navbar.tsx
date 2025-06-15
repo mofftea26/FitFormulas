@@ -13,11 +13,7 @@ const Navbar = () => {
           FitFormulas
         </Link>
         <ul className={styles.navLinks}>
-          <li>
-            <Link to="/dashboard" activeProps={{ className: styles.active }}>
-              Dashboard
-            </Link>
-          </li>
+          <li></li>
         </ul>
         <ThemeToggle className={styles.themeToggle} buttonType="icon" />
       </div>

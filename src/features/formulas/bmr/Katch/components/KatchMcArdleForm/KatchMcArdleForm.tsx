@@ -63,6 +63,16 @@ const KatchMcArdleForm = ({ setBmr }: KatchMcArdleFormProps) => {
       <button type="submit" className={clsx(styles.btnPrimary)}>
         Calculate BMR
       </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          form.reset();
+          setBmr(0);
+        }}
+        className={clsx(styles.btnOutline)}
+      >
+        Clear
+      </button>
     </form>
   );
 };

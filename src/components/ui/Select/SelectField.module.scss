@@ -52,11 +52,15 @@
     border-radius: 8px;
     z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    padding: 0;
 
     .option {
       padding: 0.75rem 1rem;
       cursor: pointer;
       font-size: 14px;
+      text-decoration: none;
+      color: var(--color-secondary-800);
+      list-style-type: none;
 
       &:hover {
         background-color: var(--color-primary-100);
@@ -64,7 +68,9 @@
 
       &.selected {
         background-color: var(--color-secondary-200);
-        font-weight: 600;
+        color: var(--color-primary-500);
+
+        font-weight: 700;
       }
     }
   }

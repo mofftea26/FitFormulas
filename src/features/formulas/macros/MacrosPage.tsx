@@ -28,25 +28,28 @@ const MacrosPage = () => {
           <Card>
             <MacrosForm setMacros={setMacros} />
           </Card>
-          {macros && (
-            <div className={styles.results}>
-              <CalculatorResults
-                result={macros.protein.toString()}
-                label="Protein"
-                unit="g"
-              />
-              <CalculatorResults
-                result={macros.fats.toString()}
-                label="Fats"
-                unit="g"
-              />
-              <CalculatorResults
-                result={macros.carbs.toString()}
-                label="Carbs"
-                unit="g"
-              />
-            </div>
-          )}
+          {macros &&
+            macros.protein !== 0 &&
+            macros.fats !== 0 &&
+            macros.carbs !== 0 && (
+              <div className={styles.results}>
+                <CalculatorResults
+                  result={macros.protein.toString()}
+                  label="Protein"
+                  unit="g"
+                />
+                <CalculatorResults
+                  result={macros.fats.toString()}
+                  label="Fats"
+                  unit="g"
+                />
+                <CalculatorResults
+                  result={macros.carbs.toString()}
+                  label="Carbs"
+                  unit="g"
+                />
+              </div>
+            )}
         </div>
       </main>
     </div>

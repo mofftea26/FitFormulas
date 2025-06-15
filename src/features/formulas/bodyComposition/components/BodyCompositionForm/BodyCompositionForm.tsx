@@ -158,6 +158,16 @@ const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
       <button type="submit" className={clsx(styles.btnPrimary)}>
         Calculate Composition
       </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          form.reset();
+          onEstimate(0, 0, 0);
+        }}
+        className={clsx(styles.btnOutline)}
+      >
+        Clear
+      </button>
     </form>
   );
 };

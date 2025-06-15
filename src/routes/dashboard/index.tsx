@@ -12,21 +12,19 @@ function Dashboard() {
       <main className={styles.main}>
         <div className={styles.links}>
           <Link to="/dashboard/bmr-mifflin" className={styles.link}>
-            <button className={styles.btn}>Mifflin-St Jeor (BMR)</button>
+            <div className={styles.btn}>Mifflin-St Jeor (BMR)</div>
           </Link>
           <Link to="/dashboard/bmr-katch" className={styles.link}>
-            <button className={styles.btn}>Katch-McArdle (BMR)</button>
+            <div className={styles.btn}>Katch-McArdle (BMR)</div>
           </Link>
           <Link to="/dashboard/tdee" className={styles.link}>
-            <button className={styles.btn}>
-              Total daily energy expenditure
-            </button>
+            <div className={styles.btn}>Total daily energy expenditure</div>
           </Link>
           <Link to="/dashboard/macros" className={styles.link}>
-            <button className={styles.btn}>Macronutrients</button>
+            <div className={styles.btn}>Macronutrients</div>
           </Link>
           <Link to="/dashboard/body-composition" className={styles.link}>
-            <button className={styles.btn}>Body Composition</button>
+            <div className={styles.btn}>Body Composition</div>
           </Link>
         </div>
       </main>

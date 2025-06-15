@@ -103,6 +103,20 @@ const MacrosForm = ({ setMacros }: MacrosFormProps) => {
       <button type="submit" className={clsx(styles.btnPrimary)}>
         Calculate Macros
       </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          form.reset();
+          setMacros({
+            protein: 0,
+            carbs: 0,
+            fats: 0,
+          });
+        }}
+        className={clsx(styles.btnOutline)}
+      >
+        Clear
+      </button>
     </form>
   );
 };
