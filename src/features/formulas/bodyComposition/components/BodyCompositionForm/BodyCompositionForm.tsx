@@ -9,6 +9,7 @@ import {
 } from "@/utils/coreFunctions";
 import InputField from "@/components/ui/Input/InputField";
 import SelectField from "@/components/ui/Select/SelectField";
+import Card from "@/components/ui/Card/Card";
 
 type BodyCompositionFormProps = {
   onCalculate: (
@@ -20,7 +21,10 @@ type BodyCompositionFormProps = {
   onClear: () => void;
 };
 
-const BodyCompositionForm = ({ onCalculate, onClear }: BodyCompositionFormProps) => {
+const BodyCompositionForm = ({
+  onCalculate,
+  onClear,
+}: BodyCompositionFormProps) => {
   const form = useForm({
     defaultValues: {
       sex: "male" as BodyFatInput["sex"],
@@ -54,127 +58,129 @@ const BodyCompositionForm = ({ onCalculate, onClear }: BodyCompositionFormProps)
   const hipUnit = unit === "metric" ? "cm" : "in";
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        void form.handleSubmit();
-      }}
-      className={clsx(styles.form)}
-    >
-      <form.Field name="sex">
-        {(field) => (
-          <SelectField
-            className={styles.inputField}
-            label="Sex"
-            value={field.state.value}
-            onChange={(val) => field.handleChange(val)}
-            options={[
-              { value: "male", label: "Male" },
-              { value: "female", label: "Female" },
-            ]}
-          />
-        )}
-      </form.Field>
-
-      <form.Field name="waist">
-        {(field) => (
-          <InputField
-            type="number"
-            label="Waist"
-            placeholder="Enter waist"
-            value={field.state.value}
-            unit={waistUnit}
-            className={styles.inputField}
-            onChange={(val) => field.handleChange(Number(val))}
-          />
-        )}
-      </form.Field>
-
-      <form.Field name="neck">
-        {(field) => (
-          <InputField
-            type="number"
-            label="Neck"
-            placeholder="Enter neck"
-            value={field.state.value}
-            unit={neckUnit}
-            className={styles.inputField}
-            onChange={(val) => field.handleChange(Number(val))}
-          />
-        )}
-      </form.Field>
-
-      <form.Field name="height">
-        {(field) => (
-          <InputField
-            type="number"
-            label="Height"
-            placeholder="Enter height"
-            value={field.state.value}
-            unit={heightUnit}
-            className={styles.inputField}
-            onChange={(val) => field.handleChange(Number(val))}
-          />
-        )}
-      </form.Field>
-
-      <form.Field name="hip">
-        {(field) => (
-          <InputField
-            type="number"
-            label="Hip"
-            placeholder="Enter hip"
-            value={field.state.value}
-            unit={hipUnit}
-            className={styles.inputField}
-            onChange={(val) => field.handleChange(Number(val))}
-            disabled={form.getFieldValue("sex") === "male"}
-          />
-        )}
-      </form.Field>
-
-      <form.Field name="weight">
-        {(field) => (
-          <InputField
-            type="number"
-            label="Weight"
-            placeholder="Enter weight"
-            value={field.state.value}
-            unit={weightUnit}
-            className={styles.inputField}
-            onChange={(val) => field.handleChange(Number(val))}
-          />
-        )}
-      </form.Field>
-
-      <form.Field name="unit">
-        {(field) => (
-          <SelectField
-            label="Unit"
-            value={field.state.value || "metric"}
-            onChange={(val) => field.handleChange(val)}
-            options={[
-              { value: "metric", label: "Metric" },
-              { value: "imperial", label: "Imperial" },
-            ]}
-          />
-        )}
-      </form.Field>
-
-      <button type="submit" className={clsx(styles.btnPrimary)}>
-        Calculate Composition
-      </button>
-      <button
-        onClick={(e) => {
+    <Card className={styles.container}>
+      <form
+        onSubmit={(e) => {
           e.preventDefault();
-          form.reset();
-          onClear();
+          void form.handleSubmit();
         }}
-        className={clsx(styles.btnOutline)}
+        className={clsx(styles.form)}
       >
-        Clear
-      </button>
-    </form>
+        <form.Field name="sex">
+          {(field) => (
+            <SelectField
+              className={styles.inputField}
+              label="Sex"
+              value={field.state.value}
+              onChange={(val) => field.handleChange(val)}
+              options={[
+                { value: "male", label: "Male" },
+                { value: "female", label: "Female" },
+              ]}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="waist">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Waist"
+              placeholder="Enter waist"
+              value={field.state.value}
+              unit={waistUnit}
+              className={styles.inputField}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="neck">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Neck"
+              placeholder="Enter neck"
+              value={field.state.value}
+              unit={neckUnit}
+              className={styles.inputField}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="height">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Height"
+              placeholder="Enter height"
+              value={field.state.value}
+              unit={heightUnit}
+              className={styles.inputField}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="hip">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Hip"
+              placeholder="Enter hip"
+              value={field.state.value}
+              unit={hipUnit}
+              className={styles.inputField}
+              onChange={(val) => field.handleChange(Number(val))}
+              disabled={form.getFieldValue("sex") === "male"}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="weight">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Weight"
+              placeholder="Enter weight"
+              value={field.state.value}
+              unit={weightUnit}
+              className={styles.inputField}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="unit">
+          {(field) => (
+            <SelectField
+              label="Unit"
+              value={field.state.value || "metric"}
+              onChange={(val) => field.handleChange(val)}
+              options={[
+                { value: "metric", label: "Metric" },
+                { value: "imperial", label: "Imperial" },
+              ]}
+            />
+          )}
+        </form.Field>
+
+        <button type="submit" className={clsx(styles.btnPrimary)}>
+          Calculate Composition
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            form.reset();
+            onClear();
+          }}
+          className={clsx(styles.btnOutline)}
+        >
+          Clear
+        </button>
+      </form>
+    </Card>
   );
 };
 

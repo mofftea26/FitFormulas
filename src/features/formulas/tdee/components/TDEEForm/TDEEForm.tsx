@@ -5,6 +5,7 @@ import clsx from "clsx";
 import styles from "./TDEEForm.module.scss";
 import InputField from "@/components/ui/Input/InputField";
 import SelectField from "@/components/ui/Select/SelectField";
+import Card from "@/components/ui/Card/Card";
 
 type TDEEFormProps = {
   onCalculate: (tdee: number, values: TDEEInput) => void;
@@ -24,59 +25,61 @@ const TDEEForm = ({ onCalculate, onClear }: TDEEFormProps) => {
   });
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        void form.handleSubmit();
-      }}
-      className={clsx(styles.form)}
-    >
-      <form.Field name="bmr">
-        {(field) => (
-          <InputField
-            type="number"
-            label="BMR"
-            placeholder="Enter BMR"
-            value={field.state.value}
-            onChange={(val) => field.handleChange(Number(val))}
-            unit="kcal"
-          />
-        )}
-      </form.Field>
-
-      <form.Field name="activityLevel">
-        {(field) => (
-          <SelectField
-            label="Activity Level"
-            value={field.state.value}
-            onChange={(val) =>
-              field.handleChange(val as TDEEInput["activityLevel"])
-            }
-            options={[
-              { value: "sedentary", label: "Sedentary" },
-              { value: "light", label: "Light" },
-              { value: "moderate", label: "Moderate" },
-              { value: "active", label: "Active" },
-              { value: "very_active", label: "Very Active" },
-            ]}
-          />
-        )}
-      </form.Field>
-
-      <button type="submit" className={clsx(styles.btnPrimary)}>
-        Calculate TDEE
-      </button>
-      <button
-        onClick={(e) => {
+    <Card className={styles.container}>
+      <form
+        onSubmit={(e) => {
           e.preventDefault();
-          form.reset();
-          onClear();
+          void form.handleSubmit();
         }}
-        className={clsx(styles.btnOutline)}
+        className={clsx(styles.form)}
       >
-        Clear
-      </button>
-    </form>
+        <form.Field name="bmr">
+          {(field) => (
+            <InputField
+              type="number"
+              label="BMR"
+              placeholder="Enter BMR"
+              value={field.state.value}
+              onChange={(val) => field.handleChange(Number(val))}
+              unit="kcal"
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="activityLevel">
+          {(field) => (
+            <SelectField
+              label="Activity Level"
+              value={field.state.value}
+              onChange={(val) =>
+                field.handleChange(val as TDEEInput["activityLevel"])
+              }
+              options={[
+                { value: "sedentary", label: "Sedentary" },
+                { value: "light", label: "Light" },
+                { value: "moderate", label: "Moderate" },
+                { value: "active", label: "Active" },
+                { value: "very_active", label: "Very Active" },
+              ]}
+            />
+          )}
+        </form.Field>
+
+        <button type="submit" className={clsx(styles.btnPrimary)}>
+          Calculate TDEE
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            form.reset();
+            onClear();
+          }}
+          className={clsx(styles.btnOutline)}
+        >
+          Clear
+        </button>
+      </form>
+    </Card>
   );
 };
 

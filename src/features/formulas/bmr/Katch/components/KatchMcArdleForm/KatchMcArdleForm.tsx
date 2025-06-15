@@ -5,6 +5,7 @@ import clsx from "clsx";
 import styles from "./KatchMcArdleForm.module.scss";
 import InputField from "@/components/ui/Input/InputField";
 import SelectField from "@/components/ui/Select/SelectField";
+import Card from "@/components/ui/Card/Card";
 
 type KatchMcArdleFormProps = {
   onCalculate: (bmr: number, values: KatchMcArdleInput) => void;
@@ -25,56 +26,58 @@ const KatchMcArdleForm = ({ onCalculate, onClear }: KatchMcArdleFormProps) => {
   const unit = useStore(form.store, (state) => state.values.unit);
   const weightUnit = unit === "metric" ? "kg" : "lbs";
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        void form.handleSubmit();
-      }}
-      className={clsx(styles.form)}
-    >
-      <form.Field name="leanBodyMass">
-        {(field) => (
-          <InputField
-            unit={weightUnit}
-            type="number"
-            label="Lean Body Mass"
-            placeholder="Enter lean body mass"
-            value={field.state.value}
-            onChange={(val) => field.handleChange(Number(val))}
-          />
-        )}
-      </form.Field>
-
-      <form.Field name="unit">
-        {(field) => (
-          <SelectField
-            label="Unit"
-            value={field.state.value || "metric"}
-            onChange={(val) =>
-              field.handleChange(val as KatchMcArdleInput["unit"])
-            }
-            options={[
-              { value: "metric", label: "Metric (kg)" },
-              { value: "imperial", label: "Imperial (lbs)" },
-            ]}
-          />
-        )}
-      </form.Field>
-
-      <button type="submit" className={clsx(styles.btnPrimary)}>
-        Calculate BMR
-      </button>
-      <button
-        onClick={(e) => {
+    <Card className={styles.container}>
+      <form
+        onSubmit={(e) => {
           e.preventDefault();
-          form.reset();
-          onClear();
+          void form.handleSubmit();
         }}
-        className={clsx(styles.btnOutline)}
+        className={clsx(styles.form)}
       >
-        Clear
-      </button>
-    </form>
+        <form.Field name="leanBodyMass">
+          {(field) => (
+            <InputField
+              unit={weightUnit}
+              type="number"
+              label="Lean Body Mass"
+              placeholder="Enter lean body mass"
+              value={field.state.value}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="unit">
+          {(field) => (
+            <SelectField
+              label="Unit"
+              value={field.state.value || "metric"}
+              onChange={(val) =>
+                field.handleChange(val as KatchMcArdleInput["unit"])
+              }
+              options={[
+                { value: "metric", label: "Metric (kg)" },
+                { value: "imperial", label: "Imperial (lbs)" },
+              ]}
+            />
+          )}
+        </form.Field>
+
+        <button type="submit" className={clsx(styles.btnPrimary)}>
+          Calculate BMR
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            form.reset();
+            onClear();
+          }}
+          className={clsx(styles.btnOutline)}
+        >
+          Clear
+        </button>
+      </form>
+    </Card>
   );
 };
 
