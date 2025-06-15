@@ -6,6 +6,7 @@ import styles from "./MifflinStJeorForm.module.scss";
 import InputField from "@/components/ui/Input/InputField";
 import SelectField from "@/components/ui/Select/SelectField";
 import { useStore } from "@tanstack/react-form";
+import Card from "@/components/ui/Card/Card";
 
 type MifflinStJeorFormProps = {
   setBmr: (bmr: number) => void;
@@ -31,87 +32,89 @@ const MifflinStJeorForm = ({ setBmr }: MifflinStJeorFormProps) => {
   const heightUnit = unit === "metric" ? "cm" : "in";
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        void form.handleSubmit();
-      }}
-      className={clsx(styles.form)}
-    >
-      <form.Field name="weight">
-        {(field) => (
-          <InputField
-            type="number"
-            label="Weight"
-            placeholder="Enter weight"
-            value={field.state.value}
-            unit={weightUnit}
-            onChange={(val) => field.handleChange(Number(val))}
-          />
-        )}
-      </form.Field>
+    <Card className={styles.container}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          void form.handleSubmit();
+        }}
+        className={styles.form}
+      >
+        <form.Field name="weight">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Weight"
+              placeholder="Enter weight"
+              value={field.state.value}
+              unit={weightUnit}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
 
-      <form.Field name="height">
-        {(field) => (
-          <InputField
-            type="number"
-            label="Height"
-            placeholder="Enter height"
-            value={field.state.value}
-            unit={heightUnit}
-            onChange={(val) => field.handleChange(Number(val))}
-          />
-        )}
-      </form.Field>
+        <form.Field name="height">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Height"
+              placeholder="Enter height"
+              value={field.state.value}
+              unit={heightUnit}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
 
-      <form.Field name="age">
-        {(field) => (
-          <InputField
-            type="number"
-            label="Age"
-            placeholder="Enter age"
-            value={field.state.value}
-            onChange={(val) => field.handleChange(Number(val))}
-          />
-        )}
-      </form.Field>
+        <form.Field name="age">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Age"
+              placeholder="Enter age"
+              value={field.state.value}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
 
-      <form.Field name="sex">
-        {(field) => (
-          <SelectField
-            label="Sex"
-            value={field.state.value}
-            onChange={(val) =>
-              field.handleChange(val as MifflinStJeorInput["sex"])
-            }
-            options={[
-              { value: "male", label: "Male" },
-              { value: "female", label: "Female" },
-            ]}
-          />
-        )}
-      </form.Field>
+        <form.Field name="sex">
+          {(field) => (
+            <SelectField
+              label="Sex"
+              value={field.state.value}
+              onChange={(val) =>
+                field.handleChange(val as MifflinStJeorInput["sex"])
+              }
+              options={[
+                { value: "male", label: "Male" },
+                { value: "female", label: "Female" },
+              ]}
+            />
+          )}
+        </form.Field>
 
-      <form.Field name="unit">
-        {(field) => (
-          <SelectField
-            label="Unit"
-            value={field.state.value || "metric"}
-            onChange={(val) =>
-              field.handleChange(val as MifflinStJeorInput["unit"])
-            }
-            options={[
-              { value: "metric", label: "Metric (kg, cm)" },
-              { value: "imperial", label: "Imperial (lbs, inches)" },
-            ]}
-          />
-        )}
-      </form.Field>
+        <form.Field name="unit">
+          {(field) => (
+            <SelectField
+              label="Unit"
+              value={field.state.value || "metric"}
+              onChange={(val) =>
+                field.handleChange(val as MifflinStJeorInput["unit"])
+              }
+              options={[
+                { value: "metric", label: "Metric (kg, cm)" },
+                { value: "imperial", label: "Imperial (lbs, inches)" },
+              ]}
+            />
+          )}
+        </form.Field>
 
-      <button type="submit" className={clsx(styles.btnPrimary)}>
-        Calculate BMR
-      </button>
-    </form>
+        <button type="submit" className={clsx(styles.btnPrimary)}>
+          Calculate BMR
+        </button>
+      </form>
+    </Card>
   );
 };
 

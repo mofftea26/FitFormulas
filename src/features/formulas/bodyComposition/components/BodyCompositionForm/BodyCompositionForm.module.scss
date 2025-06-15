@@ -15,6 +15,9 @@
   @include input;
   min-width: 200px;
 }
+.inputField {
+  flex: 1;
+}
 
 .btnPrimary {
   @include btnPrimary;

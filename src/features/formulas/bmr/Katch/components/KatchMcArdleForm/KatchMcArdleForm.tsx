@@ -1,6 +1,6 @@
 import { calculateKatchMcArdle } from "@/utils/coreFunctions/bmr";
 import { KatchMcArdleInput } from "@/utils/coreFunctions/bmr/types";
-import { useForm } from "@tanstack/react-form";
+import { useForm, useStore } from "@tanstack/react-form";
 import clsx from "clsx";
 import styles from "./KatchMcArdleForm.module.scss";
 import InputField from "@/components/ui/Input/InputField";
@@ -21,7 +21,8 @@ const KatchMcArdleForm = ({ setBmr }: KatchMcArdleFormProps) => {
       setBmr(bmr);
     },
   });
-
+  const unit = useStore(form.store, (state) => state.values.unit);
+  const weightUnit = unit === "metric" ? "kg" : "lbs";
   return (
     <form
       onSubmit={(e) => {
@@ -33,6 +34,7 @@ const KatchMcArdleForm = ({ setBmr }: KatchMcArdleFormProps) => {
       <form.Field name="leanBodyMass">
         {(field) => (
           <InputField
+            unit={weightUnit}
             type="number"
             label="Lean Body Mass"
             placeholder="Enter lean body mass"

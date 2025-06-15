@@ -1,12 +1,16 @@
 @use "@/styles/variables" as *;
 @use "@/styles/mixins" as *;
+.container {
+  width: 100%;
+  max-width: 500px;
+  flex-shrink: 0;
+}
 .form {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: column;
   min-width: 300px;
   max-width: 500px;
-
   gap: 1rem;
 }
 

@@ -5,7 +5,6 @@ import styles from "./MifflinStJeorPage.module.scss";
 import { useTheme } from "@/components/providers/ThemeProvider/ThemeProvider";
 import CalculatorResults from "../../components/CalculatorResults/CalculatorResults";
 import { useState } from "react";
-import Card from "@/components/ui/Card/Card";
 
 const MifflinStJeorPage = () => {
   const { theme } = useTheme();
@@ -18,11 +17,14 @@ const MifflinStJeorPage = () => {
         <h1 className={clsx(styles.heading, theme === "dark" && styles.dark)}>
           Mifflin-St Jeor BMR Calculator
         </h1>
-        <div className={styles.form}>
-          <Card>
-            <MifflinStJeorForm setBmr={setBmr} />
-          </Card>
-          <CalculatorResults result={bmr.toString()} label="BMR" unit="kcal" />
+        <div className={styles.content}>
+          <MifflinStJeorForm setBmr={setBmr} />
+          <CalculatorResults
+            result={bmr.toString()}
+            label="BMR"
+            unit="kcal"
+            className={styles.result}
+          />
         </div>
       </main>
     </div>

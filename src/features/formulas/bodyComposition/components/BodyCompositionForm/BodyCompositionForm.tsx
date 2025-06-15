@@ -1,4 +1,4 @@
-import { useForm } from "@tanstack/react-form";
+import { useForm, useStore } from "@tanstack/react-form";
 import clsx from "clsx";
 import styles from "./BodyCompositionForm.module.scss";
 import {
@@ -40,6 +40,12 @@ const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
       onEstimate(bodyFat, leanMass, fatMass);
     },
   });
+  const unit = useStore(form.store, (state) => state.values.unit);
+  const weightUnit = unit === "metric" ? "kg" : "lbs";
+  const heightUnit = unit === "metric" ? "cm" : "in";
+  const waistUnit = unit === "metric" ? "cm" : "in";
+  const neckUnit = unit === "metric" ? "cm" : "in";
+  const hipUnit = unit === "metric" ? "cm" : "in";
 
   return (
     <form
@@ -52,6 +58,7 @@ const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
       <form.Field name="sex">
         {(field) => (
           <SelectField
+            className={styles.inputField}
             label="Sex"
             value={field.state.value}
             onChange={(val) => field.handleChange(val)}
@@ -70,6 +77,8 @@ const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
             label="Waist"
             placeholder="Enter waist"
             value={field.state.value}
+            unit={waistUnit}
+            className={styles.inputField}
             onChange={(val) => field.handleChange(Number(val))}
           />
         )}
@@ -82,6 +91,8 @@ const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
             label="Neck"
             placeholder="Enter neck"
             value={field.state.value}
+            unit={neckUnit}
+            className={styles.inputField}
             onChange={(val) => field.handleChange(Number(val))}
           />
         )}
@@ -94,6 +105,8 @@ const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
             label="Height"
             placeholder="Enter height"
             value={field.state.value}
+            unit={heightUnit}
+            className={styles.inputField}
             onChange={(val) => field.handleChange(Number(val))}
           />
         )}
@@ -106,6 +119,8 @@ const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
             label="Hip"
             placeholder="Enter hip"
             value={field.state.value}
+            unit={hipUnit}
+            className={styles.inputField}
             onChange={(val) => field.handleChange(Number(val))}
             disabled={form.getFieldValue("sex") === "male"}
           />
@@ -119,6 +134,8 @@ const BodyCompositionForm = ({ onEstimate }: BodyCompositionFormProps) => {
             label="Weight"
             placeholder="Enter weight"
             value={field.state.value}
+            unit={weightUnit}
+            className={styles.inputField}
             onChange={(val) => field.handleChange(Number(val))}
           />
         )}
