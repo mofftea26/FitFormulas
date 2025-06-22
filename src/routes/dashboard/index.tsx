@@ -17,6 +17,9 @@ function Dashboard() {
           <Link to="/dashboard/bmr-katch" className={styles.link}>
             <div className={styles.btn}>Katch-McArdle (BMR)</div>
           </Link>
+          <Link to="/dashboard/bmr-harris" className={styles.link}>
+            <div className={styles.btn}>Harris-Benedict (BMR)</div>
+          </Link>
           <Link to="/dashboard/tdee" className={styles.link}>
             <div className={styles.btn}>Total daily energy expenditure</div>
           </Link>

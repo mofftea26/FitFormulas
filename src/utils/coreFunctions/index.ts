@@ -1,6 +1,14 @@
 // BMR formulas
-export { calculateMifflinStJeor, calculateKatchMcArdle } from "./bmr/index";
-export type { MifflinStJeorInput, KatchMcArdleInput } from "./bmr/types";
+export {
+  calculateMifflinStJeor,
+  calculateKatchMcArdle,
+  calculateHarrisBenedict,
+} from "./bmr/index";
+export type {
+  MifflinStJeorInput,
+  KatchMcArdleInput,
+  HarrisBenedictInput,
+} from "./bmr/types";
 
 // TDEE formulas
 export { calculateTDEE } from "./tdee/index";

@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   calculateMifflinStJeor,
   calculateKatchMcArdle,
+  calculateHarrisBenedict,
   calculateTDEE,
   calculateMacros,
   estimateBodyFatPercentage,
@@ -39,6 +40,17 @@ describe("BMR Calculations", () => {
       unit: "metric",
     });
     expect(Math.round(bmr)).toBeCloseTo(1774, -1);
+  });
+
+  it("calculates Harris-Benedict", () => {
+    const bmr = calculateHarrisBenedict({
+      weight: 80,
+      height: 180,
+      age: 30,
+      sex: "male",
+      unit: "metric",
+    });
+    expect(Math.round(bmr)).toBe(1854);
   });
 });
 
