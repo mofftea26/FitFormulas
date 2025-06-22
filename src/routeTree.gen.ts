@@ -127,18 +127,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexImport
       parentRoute: typeof rootRoute
     }
-    '/dashboard/(bmr-katch)/bmr-katch': {
-      id: '/dashboard/(bmr-katch)/bmr-katch'
-      path: '/dashboard/bmr-katch'
-      fullPath: '/dashboard/bmr-katch'
-      preLoaderRoute: typeof DashboardbmrKatchBmrKatchLazyImport
-      parentRoute: typeof rootRoute
-    }
     '/dashboard/(bmr-harris)/bmr-harris': {
       id: '/dashboard/(bmr-harris)/bmr-harris'
       path: '/dashboard/bmr-harris'
       fullPath: '/dashboard/bmr-harris'
       preLoaderRoute: typeof DashboardbmrHarrisBmrHarrisLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/(bmr-katch)/bmr-katch': {
+      id: '/dashboard/(bmr-katch)/bmr-katch'
+      path: '/dashboard/bmr-katch'
+      fullPath: '/dashboard/bmr-katch'
+      preLoaderRoute: typeof DashboardbmrKatchBmrKatchLazyImport
       parentRoute: typeof rootRoute
     }
     '/dashboard/(bmr-mifflin)/bmr-mifflin': {
@@ -177,8 +177,8 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardIndexRoute
-  '/dashboard/bmr-katch': typeof DashboardbmrKatchBmrKatchLazyRoute
   '/dashboard/bmr-harris': typeof DashboardbmrHarrisBmrHarrisLazyRoute
+  '/dashboard/bmr-katch': typeof DashboardbmrKatchBmrKatchLazyRoute
   '/dashboard/bmr-mifflin': typeof DashboardbmrMifflinBmrMifflinLazyRoute
   '/dashboard/body-composition': typeof DashboardbodyCompositionBodyCompositionLazyRoute
   '/dashboard/macros': typeof DashboardmacrosMacrosLazyRoute
@@ -188,8 +188,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardIndexRoute
-  '/dashboard/bmr-katch': typeof DashboardbmrKatchBmrKatchLazyRoute
   '/dashboard/bmr-harris': typeof DashboardbmrHarrisBmrHarrisLazyRoute
+  '/dashboard/bmr-katch': typeof DashboardbmrKatchBmrKatchLazyRoute
   '/dashboard/bmr-mifflin': typeof DashboardbmrMifflinBmrMifflinLazyRoute
   '/dashboard/body-composition': typeof DashboardbodyCompositionBodyCompositionLazyRoute
   '/dashboard/macros': typeof DashboardmacrosMacrosLazyRoute
@@ -200,6 +200,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/(bmr-harris)/bmr-harris': typeof DashboardbmrHarrisBmrHarrisLazyRoute
   '/dashboard/(bmr-katch)/bmr-katch': typeof DashboardbmrKatchBmrKatchLazyRoute
   '/dashboard/(bmr-mifflin)/bmr-mifflin': typeof DashboardbmrMifflinBmrMifflinLazyRoute
   '/dashboard/(body-composition)/body-composition': typeof DashboardbodyCompositionBodyCompositionLazyRoute
@@ -212,8 +213,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
-    | '/dashboard/bmr-katch'
     | '/dashboard/bmr-harris'
+    | '/dashboard/bmr-katch'
     | '/dashboard/bmr-mifflin'
     | '/dashboard/body-composition'
     | '/dashboard/macros'
@@ -222,8 +223,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/dashboard'
-    | '/dashboard/bmr-katch'
     | '/dashboard/bmr-harris'
+    | '/dashboard/bmr-katch'
     | '/dashboard/bmr-mifflin'
     | '/dashboard/body-composition'
     | '/dashboard/macros'
@@ -232,8 +233,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/dashboard/'
-    | '/dashboard/(bmr-katch)/bmr-katch'
     | '/dashboard/(bmr-harris)/bmr-harris'
+    | '/dashboard/(bmr-katch)/bmr-katch'
     | '/dashboard/(bmr-mifflin)/bmr-mifflin'
     | '/dashboard/(body-composition)/body-composition'
     | '/dashboard/(macros)/macros'
@@ -244,8 +245,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
-  DashboardbmrKatchBmrKatchLazyRoute: typeof DashboardbmrKatchBmrKatchLazyRoute
   DashboardbmrHarrisBmrHarrisLazyRoute: typeof DashboardbmrHarrisBmrHarrisLazyRoute
+  DashboardbmrKatchBmrKatchLazyRoute: typeof DashboardbmrKatchBmrKatchLazyRoute
   DashboardbmrMifflinBmrMifflinLazyRoute: typeof DashboardbmrMifflinBmrMifflinLazyRoute
   DashboardbodyCompositionBodyCompositionLazyRoute: typeof DashboardbodyCompositionBodyCompositionLazyRoute
   DashboardmacrosMacrosLazyRoute: typeof DashboardmacrosMacrosLazyRoute
@@ -255,8 +256,8 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardIndexRoute: DashboardIndexRoute,
-  DashboardbmrKatchBmrKatchLazyRoute: DashboardbmrKatchBmrKatchLazyRoute,
   DashboardbmrHarrisBmrHarrisLazyRoute: DashboardbmrHarrisBmrHarrisLazyRoute,
+  DashboardbmrKatchBmrKatchLazyRoute: DashboardbmrKatchBmrKatchLazyRoute,
   DashboardbmrMifflinBmrMifflinLazyRoute:
     DashboardbmrMifflinBmrMifflinLazyRoute,
   DashboardbodyCompositionBodyCompositionLazyRoute:
@@ -277,8 +278,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/dashboard/",
-        "/dashboard/(bmr-katch)/bmr-katch",
         "/dashboard/(bmr-harris)/bmr-harris",
+        "/dashboard/(bmr-katch)/bmr-katch",
         "/dashboard/(bmr-mifflin)/bmr-mifflin",
         "/dashboard/(body-composition)/body-composition",
         "/dashboard/(macros)/macros",
@@ -291,11 +292,11 @@ export const routeTree = rootRoute
     "/dashboard/": {
       "filePath": "dashboard/index.tsx"
     },
-    "/dashboard/(bmr-katch)/bmr-katch": {
-      "filePath": "dashboard/(bmr-katch)/bmr-katch.lazy.tsx"
-    },
     "/dashboard/(bmr-harris)/bmr-harris": {
       "filePath": "dashboard/(bmr-harris)/bmr-harris.lazy.tsx"
+    },
+    "/dashboard/(bmr-katch)/bmr-katch": {
+      "filePath": "dashboard/(bmr-katch)/bmr-katch.lazy.tsx"
     },
     "/dashboard/(bmr-mifflin)/bmr-mifflin": {
       "filePath": "dashboard/(bmr-mifflin)/bmr-mifflin.lazy.tsx"
