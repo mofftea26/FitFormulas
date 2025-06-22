@@ -18,6 +18,14 @@ export type { TDEEInput } from "./tdee/types";
 export { calculateMacros } from "./macros/index";
 export type { MacroInput } from "./macros/types";
 
+// Micronutrient recommendations
+export { getMicronutrientRecommendations } from "./micros";
+export type {
+  MicrosInput,
+  MicronutrientRecommendations,
+  HealthGoal,
+} from "./micros/types";
+
 // Body composition estimates
 export {
   estimateBodyFatPercentage,

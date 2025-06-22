@@ -26,6 +26,9 @@ function Dashboard() {
           <Link to="/dashboard/macros" className={styles.link}>
             <div className={styles.btn}>Macronutrients</div>
           </Link>
+          <Link to="/dashboard/micros" className={styles.link}>
+            <div className={styles.btn}>Micronutrients</div>
+          </Link>
           <Link to="/dashboard/body-composition" className={styles.link}>
             <div className={styles.btn}>Body Composition</div>
           </Link>
