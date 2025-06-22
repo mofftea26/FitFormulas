@@ -23,6 +23,10 @@ const goalOptions: { value: HealthGoal; label: string }[] = [
   { value: "bulking", label: "Bulking" },
   { value: "strength", label: "Strength" },
   { value: "endurance", label: "Endurance" },
+  { value: "bodybuilding", label: "Bodybuilding" },
+  { value: "powerlifting", label: "Powerlifting" },
+  { value: "crossfit", label: "CrossFit" },
+  { value: "general_fitness", label: "General Fitness" },
 ];
 
 const MicrosForm = ({ onCalculate, onClear }: MicrosFormProps) => {
@@ -30,6 +34,10 @@ const MicrosForm = ({ onCalculate, onClear }: MicrosFormProps) => {
     defaultValues: {
       age: 30,
       sex: "male" as MicrosInput["sex"],
+      weightKg: 70,
+      heightCm: 170,
+      leanBodyMassKg: 56,
+      activityLevel: "sedentary" as NonNullable<MicrosInput["activityLevel"]>,
       pregnant: false,
       lactating: false,
       goal: "maintenance" as HealthGoal,
@@ -59,6 +67,58 @@ const MicrosForm = ({ onCalculate, onClear }: MicrosFormProps) => {
               placeholder="Enter age"
               value={field.state.value}
               onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="weightKg">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Weight (kg)"
+              placeholder="Enter weight"
+              value={field.state.value}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="heightCm">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Height (cm)"
+              placeholder="Enter height"
+              value={field.state.value}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="leanBodyMassKg">
+          {(field) => (
+            <InputField
+              type="number"
+              label="Lean Body Mass (kg)"
+              placeholder="Enter LBM"
+              value={field.state.value}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="activityLevel">
+          {(field) => (
+            <SelectField
+              label="Activity Level"
+              value={field.state.value}
+              onChange={(val) =>
+                field.handleChange(val as NonNullable<MicrosInput["activityLevel"]>)
+              }
+              options={[
+                { value: "sedentary", label: "Sedentary" },
+                { value: "active", label: "Active" },
+              ]}
             />
           )}
         </form.Field>
