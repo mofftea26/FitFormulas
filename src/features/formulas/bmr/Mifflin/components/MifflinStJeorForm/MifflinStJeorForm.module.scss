@@ -10,7 +10,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  min-width: 300px;
   max-width: 500px;
   gap: 1rem;
 }
@@ -18,7 +17,6 @@
 .input,
 .select {
   @include input;
-  width: 100%;
 }
 
 .btnPrimary {

@@ -19,11 +19,11 @@ import { Route as DashboardIndexImport } from './routes/dashboard/index'
 // Create Virtual Routes
 
 const DashboardtdeeTdeeLazyImport = createFileRoute('/dashboard/(tdee)/tdee')()
-const DashboardmacrosMacrosLazyImport = createFileRoute(
-  '/dashboard/(macros)/macros',
-)()
 const DashboardmicrosMicrosLazyImport = createFileRoute(
   '/dashboard/(micros)/micros',
+)()
+const DashboardmacrosMacrosLazyImport = createFileRoute(
+  '/dashboard/(macros)/macros',
 )()
 const DashboardbodyCompositionBodyCompositionLazyImport = createFileRoute(
   '/dashboard/(body-composition)/body-composition',
@@ -60,20 +60,20 @@ const DashboardtdeeTdeeLazyRoute = DashboardtdeeTdeeLazyImport.update({
   import('./routes/dashboard/(tdee)/tdee.lazy').then((d) => d.Route),
 )
 
-const DashboardmacrosMacrosLazyRoute = DashboardmacrosMacrosLazyImport.update({
-  id: '/dashboard/(macros)/macros',
-  path: '/dashboard/macros',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/dashboard/(macros)/macros.lazy').then((d) => d.Route),
-)
-
 const DashboardmicrosMicrosLazyRoute = DashboardmicrosMicrosLazyImport.update({
   id: '/dashboard/(micros)/micros',
   path: '/dashboard/micros',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
   import('./routes/dashboard/(micros)/micros.lazy').then((d) => d.Route),
+)
+
+const DashboardmacrosMacrosLazyRoute = DashboardmacrosMacrosLazyImport.update({
+  id: '/dashboard/(macros)/macros',
+  path: '/dashboard/macros',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/dashboard/(macros)/macros.lazy').then((d) => d.Route),
 )
 
 const DashboardbodyCompositionBodyCompositionLazyRoute =
@@ -171,6 +171,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard/macros'
       fullPath: '/dashboard/macros'
       preLoaderRoute: typeof DashboardmacrosMacrosLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/(micros)/micros': {
+      id: '/dashboard/(micros)/micros'
+      path: '/dashboard/micros'
+      fullPath: '/dashboard/micros'
+      preLoaderRoute: typeof DashboardmicrosMicrosLazyImport
       parentRoute: typeof rootRoute
     }
     '/dashboard/(tdee)/tdee': {

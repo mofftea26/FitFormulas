@@ -13,16 +13,11 @@
 
 .links {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 1rem;
-  max-width: 28rem;
+  max-width: 100%;
   margin: 0 auto;
-  align-items: center;
-}
-.link {
-  @include btnPrimary;
-  text-decoration: none;
-  .btn {
-    cursor: pointer;
-  }
+  align-content: center;
+  justify-content: space-evenly;
 }
