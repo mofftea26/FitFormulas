@@ -22,6 +22,9 @@ const DashboardtdeeTdeeLazyImport = createFileRoute('/dashboard/(tdee)/tdee')()
 const DashboardmacrosMacrosLazyImport = createFileRoute(
   '/dashboard/(macros)/macros',
 )()
+const DashboardmicrosMicrosLazyImport = createFileRoute(
+  '/dashboard/(micros)/micros',
+)()
 const DashboardbodyCompositionBodyCompositionLazyImport = createFileRoute(
   '/dashboard/(body-composition)/body-composition',
 )()
@@ -63,6 +66,14 @@ const DashboardmacrosMacrosLazyRoute = DashboardmacrosMacrosLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
   import('./routes/dashboard/(macros)/macros.lazy').then((d) => d.Route),
+)
+
+const DashboardmicrosMicrosLazyRoute = DashboardmicrosMicrosLazyImport.update({
+  id: '/dashboard/(micros)/micros',
+  path: '/dashboard/micros',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/dashboard/(micros)/micros.lazy').then((d) => d.Route),
 )
 
 const DashboardbodyCompositionBodyCompositionLazyRoute =
@@ -182,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/bmr-mifflin': typeof DashboardbmrMifflinBmrMifflinLazyRoute
   '/dashboard/body-composition': typeof DashboardbodyCompositionBodyCompositionLazyRoute
   '/dashboard/macros': typeof DashboardmacrosMacrosLazyRoute
+  '/dashboard/micros': typeof DashboardmicrosMicrosLazyRoute
   '/dashboard/tdee': typeof DashboardtdeeTdeeLazyRoute
 }
 
@@ -193,6 +205,7 @@ export interface FileRoutesByTo {
   '/dashboard/bmr-mifflin': typeof DashboardbmrMifflinBmrMifflinLazyRoute
   '/dashboard/body-composition': typeof DashboardbodyCompositionBodyCompositionLazyRoute
   '/dashboard/macros': typeof DashboardmacrosMacrosLazyRoute
+  '/dashboard/micros': typeof DashboardmicrosMicrosLazyRoute
   '/dashboard/tdee': typeof DashboardtdeeTdeeLazyRoute
 }
 
@@ -205,6 +218,7 @@ export interface FileRoutesById {
   '/dashboard/(bmr-mifflin)/bmr-mifflin': typeof DashboardbmrMifflinBmrMifflinLazyRoute
   '/dashboard/(body-composition)/body-composition': typeof DashboardbodyCompositionBodyCompositionLazyRoute
   '/dashboard/(macros)/macros': typeof DashboardmacrosMacrosLazyRoute
+  '/dashboard/(micros)/micros': typeof DashboardmicrosMicrosLazyRoute
   '/dashboard/(tdee)/tdee': typeof DashboardtdeeTdeeLazyRoute
 }
 
@@ -218,6 +232,7 @@ export interface FileRouteTypes {
     | '/dashboard/bmr-mifflin'
     | '/dashboard/body-composition'
     | '/dashboard/macros'
+    | '/dashboard/micros'
     | '/dashboard/tdee'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -228,6 +243,7 @@ export interface FileRouteTypes {
     | '/dashboard/bmr-mifflin'
     | '/dashboard/body-composition'
     | '/dashboard/macros'
+    | '/dashboard/micros'
     | '/dashboard/tdee'
   id:
     | '__root__'
@@ -238,6 +254,7 @@ export interface FileRouteTypes {
     | '/dashboard/(bmr-mifflin)/bmr-mifflin'
     | '/dashboard/(body-composition)/body-composition'
     | '/dashboard/(macros)/macros'
+    | '/dashboard/(micros)/micros'
     | '/dashboard/(tdee)/tdee'
   fileRoutesById: FileRoutesById
 }
@@ -250,6 +267,7 @@ export interface RootRouteChildren {
   DashboardbmrMifflinBmrMifflinLazyRoute: typeof DashboardbmrMifflinBmrMifflinLazyRoute
   DashboardbodyCompositionBodyCompositionLazyRoute: typeof DashboardbodyCompositionBodyCompositionLazyRoute
   DashboardmacrosMacrosLazyRoute: typeof DashboardmacrosMacrosLazyRoute
+  DashboardmicrosMicrosLazyRoute: typeof DashboardmicrosMicrosLazyRoute
   DashboardtdeeTdeeLazyRoute: typeof DashboardtdeeTdeeLazyRoute
 }
 
@@ -263,6 +281,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardbodyCompositionBodyCompositionLazyRoute:
     DashboardbodyCompositionBodyCompositionLazyRoute,
   DashboardmacrosMacrosLazyRoute: DashboardmacrosMacrosLazyRoute,
+  DashboardmicrosMicrosLazyRoute: DashboardmicrosMicrosLazyRoute,
   DashboardtdeeTdeeLazyRoute: DashboardtdeeTdeeLazyRoute,
 }
 
@@ -283,6 +302,7 @@ export const routeTree = rootRoute
         "/dashboard/(bmr-mifflin)/bmr-mifflin",
         "/dashboard/(body-composition)/body-composition",
         "/dashboard/(macros)/macros",
+        "/dashboard/(micros)/micros",
         "/dashboard/(tdee)/tdee"
       ]
     },
@@ -306,6 +326,9 @@ export const routeTree = rootRoute
     },
     "/dashboard/(macros)/macros": {
       "filePath": "dashboard/(macros)/macros.lazy.tsx"
+    },
+    "/dashboard/(micros)/micros": {
+      "filePath": "dashboard/(micros)/micros.lazy.tsx"
     },
     "/dashboard/(tdee)/tdee": {
       "filePath": "dashboard/(tdee)/tdee.lazy.tsx"
