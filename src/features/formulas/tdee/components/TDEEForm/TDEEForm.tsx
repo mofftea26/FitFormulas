@@ -1,5 +1,5 @@
 import { calculateTDEE } from "@/utils/coreFunctions/tdee";
-import { TDEEInput } from "@/utils/coreFunctions/tdee/types";
+import { activityLevelMap } from "@/utils/coreFunctions/tdee/types";
 import { useForm } from "@tanstack/react-form";
 import clsx from "clsx";
 import styles from "./TDEEForm.module.scss";
@@ -8,7 +8,10 @@ import SelectField from "@/components/ui/Select/SelectField";
 import Card from "@/components/ui/Card/Card";
 
 type TDEEFormProps = {
-  onCalculate: (tdee: number, values: TDEEInput) => void;
+  onCalculate: (
+    tdee: number,
+    values: { bmr: number; activityLevel: keyof typeof activityLevelMap }
+  ) => void;
   onClear: () => void;
 };
 
@@ -16,14 +19,20 @@ const TDEEForm = ({ onCalculate, onClear }: TDEEFormProps) => {
   const form = useForm({
     defaultValues: {
       bmr: 1800,
-      activityLevel: "moderate" as TDEEInput["activityLevel"],
-    } satisfies TDEEInput,
+      activityLevel: "moderate" as keyof typeof activityLevelMap,
+    },
     onSubmit: async ({ value }) => {
       const tdee = calculateTDEE(value);
       onCalculate(tdee, value);
     },
   });
 
+  const activityOptions = Object.entries(activityLevelMap).map(
+    ([value, data]) => ({
+      value,
+      label: `${data.label} – ${data.description}`,
+    })
+  );
   return (
     <Card className={styles.container}>
       <form
@@ -52,15 +61,9 @@ const TDEEForm = ({ onCalculate, onClear }: TDEEFormProps) => {
               label="Activity Level"
               value={field.state.value}
               onChange={(val) =>
-                field.handleChange(val as TDEEInput["activityLevel"])
+                field.handleChange(val as keyof typeof activityLevelMap)
               }
-              options={[
-                { value: "sedentary", label: "Sedentary" },
-                { value: "light", label: "Light" },
-                { value: "moderate", label: "Moderate" },
-                { value: "active", label: "Active" },
-                { value: "very_active", label: "Very Active" },
-              ]}
+              options={activityOptions}
             />
           )}
         </form.Field>

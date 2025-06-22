@@ -9,9 +9,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  &.dark {
-    background-color: var(--color-surface);
-  }
 }
 
 .container {

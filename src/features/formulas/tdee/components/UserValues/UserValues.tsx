@@ -1,8 +1,8 @@
 import styles from "./UserValues.module.scss";
-import type { TDEEInput } from "@/utils/coreFunctions/tdee/types";
+import { activityLevelMap } from "@/utils/coreFunctions/tdee/types";
 
 type UserValuesProps = {
-  values: TDEEInput;
+  values: { bmr: number; activityLevel: keyof typeof activityLevelMap };
 };
 
 const UserValues = ({ values }: UserValuesProps) => {

@@ -1,4 +1,5 @@
 import { MacroInput } from "./types";
+import { truncateTo2Digits } from "@/utils/helpers/helperFunctions";
 
 export function calculateMacros({
   weight,
@@ -10,14 +11,24 @@ export function calculateMacros({
   const weightKg = unit === "imperial" ? weight * 0.453592 : weight;
 
   const proteinGrams = weightKg * proteinPerKg;
-  const fatGrams = (totalCalories * fatPercent) / 9;
+  const proteinCalories = proteinGrams * 4;
 
-  const remainingCalories = totalCalories - (proteinGrams * 4 + fatGrams * 9);
+  const fatCalories = totalCalories * fatPercent;
+  const fatGrams = fatCalories / 9;
+
+  const remainingCalories = totalCalories - (proteinCalories + fatCalories);
+
+  if (remainingCalories < 0) {
+    throw new Error(
+      "Total calories are too low for the given protein and fat configuration."
+    );
+  }
+
   const carbGrams = remainingCalories / 4;
 
   return {
-    protein: Math.round(proteinGrams),
-    fats: Math.round(fatGrams),
-    carbs: Math.round(carbGrams),
+    protein: { grams: truncateTo2Digits(proteinGrams), kcal: proteinCalories },
+    fats: { grams: truncateTo2Digits(fatGrams), kcal: fatCalories },
+    carbs: { grams: truncateTo2Digits(carbGrams), kcal: remainingCalories },
   };
 }

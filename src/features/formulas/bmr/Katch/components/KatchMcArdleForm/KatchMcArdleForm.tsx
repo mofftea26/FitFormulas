@@ -15,7 +15,8 @@ type KatchMcArdleFormProps = {
 const KatchMcArdleForm = ({ onCalculate, onClear }: KatchMcArdleFormProps) => {
   const form = useForm({
     defaultValues: {
-      leanBodyMass: 65,
+      weight: 70,
+      bodyFatPercentage: 15,
       unit: "metric" as KatchMcArdleInput["unit"],
     } satisfies KatchMcArdleInput,
     onSubmit: async ({ value }) => {
@@ -34,13 +35,26 @@ const KatchMcArdleForm = ({ onCalculate, onClear }: KatchMcArdleFormProps) => {
         }}
         className={clsx(styles.form)}
       >
-        <form.Field name="leanBodyMass">
+        <form.Field name="weight">
           {(field) => (
             <InputField
               unit={weightUnit}
               type="number"
-              label="Lean Body Mass"
-              placeholder="Enter lean body mass"
+              label="Weight"
+              placeholder="Enter weight"
+              value={field.state.value}
+              onChange={(val) => field.handleChange(Number(val))}
+            />
+          )}
+        </form.Field>
+
+        <form.Field name="bodyFatPercentage">
+          {(field) => (
+            <InputField
+              unit="%"
+              type="number"
+              label="Body Fat %"
+              placeholder="Enter body fat percentage"
               value={field.state.value}
               onChange={(val) => field.handleChange(Number(val))}
             />

@@ -8,37 +8,42 @@ type UserValuesProps = {
 };
 
 const UserValues = ({ values }: UserValuesProps) => {
-  const unit = values.unit === "metric" ? { wt: "kg", len: "cm" } : { wt: "lbs", len: "in" };
+  const isMetric = values.unit === "metric";
+  const unit = {
+    weight: isMetric ? "kg" : "lbs",
+    length: isMetric ? "cm" : "in",
+  };
+
   return (
     <div className={styles.summary}>
-      <div className={styles.row}>
-        <span>
-          <strong>Weight:</strong> {values.weight} {unit.wt}
-        </span>
-        <span>
-          <strong>Height:</strong> {values.height} {unit.len}
-        </span>
-      </div>
-      <div className={styles.row}>
-        <span>
-          <strong>Waist:</strong> {values.waist} {unit.len}
-        </span>
-        <span>
-          <strong>Neck:</strong> {values.neck} {unit.len}
-        </span>
-      </div>
-      {values.sex === "female" && (
-        <div className={styles.row}>
-          <span>
-            <strong>Hip:</strong> {values.hip} {unit.len}
-          </span>
-        </div>
-      )}
       <div className={styles.row}>
         <span>
           <strong>Sex:</strong> {values.sex}
         </span>
       </div>
+      <div className={styles.row}>
+        <span>
+          <strong>Weight:</strong> {values.weight} {unit.weight}
+        </span>
+        <span>
+          <strong>Height:</strong> {values.height} {unit.length}
+        </span>
+      </div>
+      <div className={styles.row}>
+        <span>
+          <strong>Waist:</strong> {values.waist} {unit.length}
+        </span>
+        <span>
+          <strong>Neck:</strong> {values.neck} {unit.length}
+        </span>
+      </div>
+      {values.sex === "female" && values.hip !== undefined && (
+        <div className={styles.row}>
+          <span>
+            <strong>Hip:</strong> {values.hip} {unit.length}
+          </span>
+        </div>
+      )}
     </div>
   );
 };

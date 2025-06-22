@@ -10,7 +10,13 @@ const UserValues = ({ values }: UserValuesProps) => {
     <div className={styles.summary}>
       <div className={styles.row}>
         <span>
-          <strong>Lean Body Mass:</strong> {values.leanBodyMass} {values.unit === "metric" ? "kg" : "lbs"}
+          <strong>Weight:</strong> {values.weight}{" "}
+          {values.unit === "metric" ? "kg" : "lbs"}
+        </span>
+      </div>
+      <div className={styles.row}>
+        <span>
+          <strong>Body Fat %:</strong> {values.bodyFatPercentage}%
         </span>
       </div>
     </div>

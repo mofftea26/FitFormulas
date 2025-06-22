@@ -36,21 +36,29 @@ const BodyCompositionForm = ({
       weight: 80,
     },
     onSubmit: async ({ value }) => {
-      const bodyFat = estimateBodyFatPercentage(value);
+      const { sex, ...rest } = value;
+      const adjustedValues = {
+        ...rest,
+        sex,
+        hip: sex === "male" ? undefined : value.hip,
+      };
+
+      const bodyFat = estimateBodyFatPercentage(adjustedValues);
       const leanMass = calculateLeanBodyMass({
-        weight: value.weight,
+        weight: adjustedValues.weight,
         bodyFatPercent: bodyFat,
-        unit: value.unit,
+        unit: adjustedValues.unit,
       });
       const fatMass = calculateFatMass({
-        weight: value.weight,
+        weight: adjustedValues.weight,
         bodyFatPercent: bodyFat,
-        unit: value.unit,
+        unit: adjustedValues.unit,
       });
-      onCalculate(bodyFat, leanMass, fatMass, value);
+      onCalculate(bodyFat, leanMass, fatMass, adjustedValues);
     },
   });
   const unit = useStore(form.store, (state) => state.values.unit);
+  const sex = useStore(form.store, (state) => state.values.sex);
   const weightUnit = unit === "metric" ? "kg" : "lbs";
   const heightUnit = unit === "metric" ? "cm" : "in";
   const waistUnit = unit === "metric" ? "cm" : "in";
@@ -72,7 +80,12 @@ const BodyCompositionForm = ({
               className={styles.inputField}
               label="Sex"
               value={field.state.value}
-              onChange={(val) => field.handleChange(val)}
+              onChange={(val) => {
+                field.handleChange(val);
+                if (val === "male") {
+                  form.setFieldValue("hip", 0);
+                }
+              }}
               options={[
                 { value: "male", label: "Male" },
                 { value: "female", label: "Female" },
@@ -122,21 +135,21 @@ const BodyCompositionForm = ({
             />
           )}
         </form.Field>
-
-        <form.Field name="hip">
-          {(field) => (
-            <InputField
-              type="number"
-              label="Hip"
-              placeholder="Enter hip"
-              value={field.state.value}
-              unit={hipUnit}
-              className={styles.inputField}
-              onChange={(val) => field.handleChange(Number(val))}
-              disabled={form.getFieldValue("sex") === "male"}
-            />
-          )}
-        </form.Field>
+        {sex === "female" && (
+          <form.Field name="hip">
+            {(field) => (
+              <InputField
+                type="number"
+                label="Hip"
+                placeholder="Enter hip"
+                value={field.state.value}
+                unit={hipUnit}
+                className={styles.inputField}
+                onChange={(val) => field.handleChange(Number(val))}
+              />
+            )}
+          </form.Field>
+        )}
 
         <form.Field name="weight">
           {(field) => (
