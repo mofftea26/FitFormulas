@@ -16,6 +16,30 @@ const UserValues = ({ values }: UserValuesProps) => {
           <strong>Sex:</strong> {values.sex}
         </span>
       </div>
+      {(values.weightKg || values.heightCm || values.activityLevel) && (
+        <div className={styles.row}>
+          {values.weightKg && (
+            <span>
+              <strong>Weight:</strong> {values.weightKg} kg
+            </span>
+          )}
+          {values.heightCm && (
+            <span>
+              <strong>Height:</strong> {values.heightCm} cm
+            </span>
+          )}
+          {values.activityLevel && (
+            <span>
+              <strong>Activity:</strong> {values.activityLevel}
+            </span>
+          )}
+          {values.leanBodyMassKg && (
+            <span>
+              <strong>LBM:</strong> {values.leanBodyMassKg} kg
+            </span>
+          )}
+        </div>
+      )}
       <div className={styles.row}>
         {values.pregnant && <span>Pregnant</span>}
         {values.lactating && <span>Lactating</span>}

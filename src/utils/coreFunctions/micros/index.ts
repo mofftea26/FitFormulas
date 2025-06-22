@@ -3,16 +3,24 @@ import { MicrosInput, MicronutrientRecommendations } from "./types";
 export function getMicronutrientRecommendations({
   age,
   sex,
+  weightKg = 70,
+  heightCm = 170,
+  leanBodyMassKg,
+  activityLevel = "sedentary",
   pregnant = false,
   lactating = false,
   goals = ["maintenance"],
 }: MicrosInput): MicronutrientRecommendations {
   const recs: MicronutrientRecommendations = {};
   const isMale = sex === "male";
+  const lbm = leanBodyMassKg ?? weightKg * 0.8;
+
+  // adjust baselines for activity level
+  const active = activityLevel === "active";
 
   // 🔹 Base RDAs
   recs["Vitamin A"] = isMale ? "900 µg" : "700 µg";
-  recs["Vitamin C"] = isMale ? "90 mg" : "75 mg";
+  recs["Vitamin C"] = isMale ? (active ? "120 mg" : "90 mg") : active ? "100 mg" : "75 mg";
   recs["Vitamin D"] = age >= 70 ? "800 IU" : "600 IU";
   recs["Calcium"] = age >= 50 ? "1200 mg" : "1000 mg";
   recs["Iron"] = pregnant
@@ -22,10 +30,26 @@ export function getMicronutrientRecommendations({
       : isMale
         ? "8 mg"
         : "18 mg";
-  recs["Magnesium"] = isMale ? "400–420 mg" : "310–320 mg";
+  recs["Magnesium"] = isMale
+    ? active
+      ? "420–450 mg"
+      : "400–420 mg"
+    : active
+      ? "320–350 mg"
+      : "310–320 mg";
   recs["Zinc"] = isMale ? "11 mg" : "8 mg";
   recs["Vitamin E"] = "15 mg";
   recs["Vitamin K"] = "90–120 µg";
+
+  if (active) {
+    recs["Protein"] = `${(1.6 * lbm).toFixed(1)} g (preferably whey)`;
+    recs["Creatine Monohydrate"] = `${Math.min(5, Math.max(3, 0.05 * weightKg)).toFixed(1)} g`;
+    recs["BCAAs"] = "5–10 g around workouts";
+    recs["Electrolytes"] = "Sodium, Potassium, Magnesium, Chloride";
+    recs["Omega-3"] = "1500–2000 mg EPA/DHA";
+    recs["Berberine"] = "500 mg";
+    recs["Tongkat Ali"] = "200–400 mg";
+  }
 
   // 🔹 Additions based on goals
   goals.forEach((goal) => {
@@ -94,6 +118,22 @@ export function getMicronutrientRecommendations({
       case "high_performance":
         recs["Creatine"] = "5 g";
         recs["Beta-Alanine"] = "3–6 g";
+        break;
+      case "bodybuilding":
+        recs["Whey Protein"] = `${(2 * lbm).toFixed(0)} g split across meals`;
+        recs["EAAs"] = "10 g around workouts";
+        break;
+      case "powerlifting":
+        recs["Creatine"] = "5 g";
+        recs["Beta-Alanine"] = "3–6 g";
+        recs["Fish Oil"] = "2000 mg EPA/DHA";
+        break;
+      case "crossfit":
+        recs["Electrolytes"] = "Sodium, Potassium, Magnesium";
+        recs["Beta-Alanine"] = "4–6 g";
+        break;
+      case "general_fitness":
+        recs["Multivitamin"] = "As directed";
         break;
       case "sleep_optimization":
         recs["Magnesium Glycinate"] = "200–400 mg";

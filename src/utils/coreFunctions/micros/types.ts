@@ -4,6 +4,10 @@ export type HealthGoal =
   | "bulking"
   | "strength"
   | "endurance"
+  | "bodybuilding"
+  | "powerlifting"
+  | "crossfit"
+  | "general_fitness"
   | "energy"
   | "immunity"
   | "focus"
@@ -34,6 +38,10 @@ export type HealthGoal =
 export interface MicrosInput {
   age: number;
   sex: "male" | "female";
+  weightKg?: number;
+  heightCm?: number;
+  leanBodyMassKg?: number;
+  activityLevel?: "sedentary" | "active";
   pregnant?: boolean;
   lactating?: boolean;
   goals?: HealthGoal[];
