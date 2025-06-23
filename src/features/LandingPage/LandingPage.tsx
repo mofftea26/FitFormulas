@@ -5,6 +5,7 @@ import CTASection from "./components/CTASection/CTASection";
 import WelcomeSection from "./components/WelcomeSection/WelcomeSection";
 import useCtaAnimation from "./hooks/useCtaAnimation";
 import styles from "./LandingPage.module.scss";
+import useRootHeightByRoute from "./hooks/useRootHeightByRoute";
 
 const LandingPage = () => {
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -20,6 +21,8 @@ const LandingPage = () => {
   });
 
   useLenis();
+  useRootHeightByRoute();
+
   return (
     <main className={styles.container} ref={containerRef}>
       <WelcomeSection scrollYProgress={scrollYProgress} />
