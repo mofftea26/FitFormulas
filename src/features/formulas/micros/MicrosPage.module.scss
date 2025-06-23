@@ -1,7 +1,7 @@
 @use "@/styles/variables" as *;
 @use "@/styles/mixins" as *;
 .page {
-  min-height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background-color: var(--color-background);
@@ -30,6 +30,7 @@
   min-height: 420px;
   transform-style: preserve-3d;
   perspective: 1000px;
+  margin-bottom: 2rem;
 }
 
 .face {
