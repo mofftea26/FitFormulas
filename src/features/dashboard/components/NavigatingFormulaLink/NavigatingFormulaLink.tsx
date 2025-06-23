@@ -26,8 +26,8 @@ const NavigatingFormulaLink = ({
       key={to}
       layout
       onClick={handleClick}
-      initial={{ scale: 0, x: 0, y: 0 }}
-      animate={isActive ? { scale: 30 } : { scale: 1, x: 0, y: 0 }}
+      initial={{ scale: 1 }}
+      animate={isActive ? { scale: 30 } : { scale: 1 }}
       transition={{
         duration: isActive ? 0.6 : 0.5,
         ease: "easeInOut",

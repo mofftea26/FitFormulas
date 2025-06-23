@@ -2,15 +2,16 @@
 @use "@/styles/mixins" as *;
 .form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  max-width: 500px;
+  flex-wrap: wrap;
   gap: 1rem;
+  width: 100%;
 }
 
 .input,
 .select {
-  @include input;
+  max-width: 200px;
 }
 
 .btnPrimary {

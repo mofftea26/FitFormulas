@@ -4,22 +4,24 @@
 .page {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-background);
   height: 100%;
-  overflow: auto;
-  padding-bottom: 5rem;
+  overflow-y: auto;
 }
 
 .main {
-  flex: 1;
+  background-color: var(--color-background);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
   position: relative;
-  min-height: 100dvh;
   max-width: 100%;
   height: 100%;
+}
+
+.content {
+  width: 100%;
+  max-width: 500px;
 }
 
 .heading {

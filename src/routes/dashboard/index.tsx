@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import styles from "./Dashboard.module.scss";
 import Navbar from "@/components/layout/Navbar/Navbar";
 import NavigatingFormulaLink from "@/features/dashboard/components/NavigatingFormulaLink/NavigatingFormulaLink";
@@ -13,6 +13,7 @@ import {
   Sandwich,
   PersonStanding,
 } from "lucide-react";
+import clsx from "clsx";
 
 export const Route = createFileRoute("/dashboard/")({
   component: Dashboard,
@@ -58,8 +59,13 @@ function Dashboard() {
   return (
     <div className={styles.page}>
       <Navbar />
-      <main className={styles.main}>
-        <div className={styles.links}>
+      <main className={clsx(styles.main)}>
+        <motion.div
+          className={styles.links}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <AnimatePresence>
             {links.map(({ to, title, icon }) => (
               <NavigatingFormulaLink
@@ -72,7 +78,7 @@ function Dashboard() {
               />
             ))}
           </AnimatePresence>
-        </div>
+        </motion.div>
       </main>
     </div>
   );

@@ -5,6 +5,7 @@ import BackButton from "@/components/ui/BackButton/BackButton";
 import { useTheme } from "@/components/providers/ThemeProvider/ThemeProvider";
 import clsx from "clsx";
 import styles from "./CalculatorLayout.module.scss";
+import { motion } from "framer-motion";
 
 type CalculatorLayoutProps = {
   title: string;
@@ -22,13 +23,18 @@ const CalculatorLayout = ({
   return (
     <div className={clsx(styles.page)}>
       <Navbar />
-      <main className={clsx(styles.main)}>
+      <motion.main
+        className={clsx(styles.main)}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <h1 className={clsx(styles.heading, theme === "dark" && styles.dark)}>
           {title}
         </h1>
         {showBackButton && <BackButton />}
         {children}
-      </main>
+      </motion.main>
     </div>
   );
 };

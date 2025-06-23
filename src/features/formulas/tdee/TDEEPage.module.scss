@@ -1,11 +1,5 @@
 @use "@/styles/variables" as *;
 @use "@/styles/mixins" as *;
-.page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-background);
-}
 
 .main {
   flex: 1;
@@ -13,6 +7,7 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  height: 100%;
 }
 
 .heading {
@@ -27,11 +22,9 @@
   position: relative;
   width: 100%;
   max-width: 500px;
-  min-height: 420px;
+  height: 100%;
   transform-style: preserve-3d;
   perspective: 1000px;
-  display: grid;
-  overflow: hidden;
 }
 
 .face {
