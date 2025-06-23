@@ -12,6 +12,8 @@
   min-height: 420px;
   transform-style: preserve-3d;
   perspective: 1000px;
+  display: grid;
+  overflow: hidden;
 }
 
 .face {
